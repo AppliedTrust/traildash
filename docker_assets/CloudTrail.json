@@ -3,15 +3,6 @@
   "services": {
     "query": {
       "list": {
-        "0": {
-          "query": "Modify*",
-          "alias": "",
-          "color": "#BF1B00",
-          "id": 0,
-          "pin": true,
-          "type": "lucene",
-          "enable": true
-        },
         "1": {
           "id": 1,
           "color": "#EAB839",
@@ -23,7 +14,6 @@
         }
       },
       "ids": [
-        0,
         1
       ]
     },
@@ -42,7 +32,7 @@
       "panels": [
         {
           "span": 6,
-          "editable": false,
+          "editable": true,
           "type": "histogram",
           "loadingEditor": false,
           "mode": "count",
@@ -59,7 +49,6 @@
           "queries": {
             "mode": "all",
             "ids": [
-              0,
               1
             ]
           },
@@ -117,7 +106,7 @@
         {
           "error": false,
           "span": 6,
-          "editable": false,
+          "editable": true,
           "type": "terms",
           "loadingEditor": false,
           "field": "UserIdentity.userName",
@@ -139,7 +128,6 @@
           "queries": {
             "mode": "all",
             "ids": [
-              0,
               1
             ]
           },
@@ -161,7 +149,7 @@
         {
           "error": false,
           "span": 3,
-          "editable": false,
+          "editable": true,
           "group": [
             "default"
           ],
@@ -169,15 +157,14 @@
           "queries": {
             "mode": "all",
             "ids": [
-              0,
               1
             ]
           },
           "field": "EventName",
           "exclude": [],
-          "missing": true,
-          "other": true,
-          "size": 10,
+          "missing": false,
+          "other": false,
+          "size": 8,
           "order": "count",
           "style": {
             "font-size": "10pt"
@@ -197,7 +184,7 @@
         {
           "error": false,
           "span": 3,
-          "editable": false,
+          "editable": true,
           "group": [
             "default"
           ],
@@ -205,13 +192,12 @@
           "queries": {
             "mode": "all",
             "ids": [
-              0,
               1
             ]
           },
           "field": "EventName",
           "exclude": [],
-          "missing": true,
+          "missing": false,
           "other": true,
           "size": 100,
           "order": "count",
@@ -233,43 +219,35 @@
         {
           "error": false,
           "span": 6,
-          "editable": false,
-          "type": "table",
+          "editable": true,
+          "type": "terms",
           "loadingEditor": false,
-          "size": 10,
-          "pages": 5,
-          "offset": 0,
-          "sort": [
-            "EventTime",
-            "desc"
-          ],
-          "overflow": "min-height",
-          "fields": [
-            "EventTime",
-            "EventName",
-            "UserIdentity.userName"
-          ],
-          "highlight": [],
-          "sortable": true,
-          "header": true,
-          "paging": true,
-          "field_list": false,
-          "all_fields": false,
-          "trimFactor": 300,
-          "localTime": true,
-          "timeField": "EventTime",
+          "field": "EventSource",
+          "exclude": [],
+          "missing": true,
+          "other": true,
+          "size": 5,
+          "order": "count",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "bar",
+          "counter_pos": "above",
           "spyable": true,
           "queries": {
-            "mode": "selected",
+            "mode": "all",
             "ids": [
-              0
+              1
             ]
           },
-          "style": {
-            "font-size": "9pt"
-          },
-          "normTimes": true,
-          "title": "Recent Changes"
+          "tmode": "terms",
+          "tstat": "total",
+          "valuefield": "",
+          "title": "Event Sources"
         }
       ],
       "notice": false
@@ -284,7 +262,7 @@
         {
           "error": false,
           "span": 12,
-          "editable": false,
+          "editable": true,
           "group": [
             "default"
           ],
@@ -317,7 +295,6 @@
           "queries": {
             "mode": "all",
             "ids": [
-              0,
               1
             ]
           },
@@ -325,7 +302,7 @@
           "status": "Stable",
           "trimFactor": 300,
           "normTimes": true,
-          "title": "Documents",
+          "title": "CloudTrail Events",
           "all_fields": false,
           "localTime": true,
           "timeField": "EventTime"
@@ -334,7 +311,7 @@
       "notice": false
     }
   ],
-  "editable": false,
+  "editable": true,
   "index": {
     "interval": "none",
     "pattern": "[logstash-]YYYY.MM.DD",
@@ -364,12 +341,9 @@
       "collapse": false,
       "notice": false,
       "query": "*",
-      "pinned": false,
+      "pinned": true,
       "history": [
-        "*",
-        "Modify*",
-        "ATSupport || ned",
-        "ATSupport OR ned"
+        "*"
       ],
       "remember": 10,
       "enable": true

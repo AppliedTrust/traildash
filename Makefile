@@ -8,3 +8,4 @@ kibana:
 docker: linux kibana
 	docker build -t appliedtrust/traildash .
 
+all: linux kibana docker 
