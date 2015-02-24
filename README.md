@@ -110,3 +110,4 @@ make docker
   1. Configure all regions to use the same S3 bucket.
   1. Configure your SQS queue to permit each region's SNS topic.
   1. Subscribe your central SQS queue to each region's SNS topic.
+  1. Disable the CloudTrail "global events" option for all but your primary region.
