@@ -7,46 +7,18 @@ Configure Traildash with a few environment variables and you're off to the races
 
 ## Quickstart
 1. [Setup AWS services to support CloudTrail](#setup-cloudtrail-in-aws)
-2. Create a dedicated IAM user with the following inline policy filing in information from S3 bucket name and SQS queue created Step 1. Create an access and download for the next step.
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "Stmt1424707635000",
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetObject"
-      ],
-      "Resource": [
-        "arn:aws:s3:::[YOUR CLOUDTRAIL S3 BUCKET NAME]/*"
-      ]
-    },
-    {
-      "Sid": "Stmt1424707727000",
-      "Effect": "Allow",
-      "Action": [
-        "sqs:DeleteMessage",
-        "sqs:ReceiveMessage"
-      ],
-      "Resource": [
-        "[YOUR SQS ARN]"
-      ]
-    }
-  ]
-}
-```
-3. Fill in the "XXX" blanks and run with docker: 
-```
-docker run -i -d -p 7000:7000 \
-	-e "AWS_ACCESS_KEY_ID=XXX" \
-	-e "AWS_SECRET_ACCESS_KEY=XXX" \
-	-e "AWS_SQS_URL=https://XXX" \
-	-e "DEBUG=1" \
-	-v /home/traildash:/var/lib/elasticsearch/ \
-	appliedtrust/traildash
-```
-4. Open http://localhost:7000/ in your browser
+1. Fill in the "XXX" blanks and run with docker: 
+
+	```
+	docker run -i -d -p 7000:7000 \
+		-e "AWS_ACCESS_KEY_ID=XXX" \
+		-e "AWS_SECRET_ACCESS_KEY=XXX" \
+		-e "AWS_SQS_URL=https://XXX" \
+		-e "DEBUG=1" \
+		-v /home/traildash:/var/lib/elasticsearch/ \
+		appliedtrust/traildash
+	```
+1. Open http://localhost:7000/ in your browser
 
 #### Required Environment Variables:
 	AWS_SQS_URL				AWS SQS URL.
@@ -87,13 +59,6 @@ export SQS_PERSIST=1
 1. Kibana provides beautiful dashboards to view the logs stored in ElasticSearch.
 1. Traildash protects access to ElasticSearch, ensuring logs are read-only.
 
-## Building
-```
-make linux
-make kibana
-make docker
-```
-
 ## Setup CloudTrail in AWS
 1. In your primary region, turn on CloudTrail: ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_01.png)
 1. Tell CloudTrail to create a new S3 bucket and SNS topic: ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_02.png)
@@ -111,3 +76,50 @@ make docker
   1. Configure your SQS queue to permit each region's SNS topic.
   1. Subscribe your central SQS queue to each region's SNS topic.
   1. Disable the CloudTrail "global events" option for all but your primary region.
+1. Finally, create a dedicated IAM user with the following inline policy, filing in information from the S3 bucket name and SQS queue ARN from above. Create an API access key and download to a safe place.
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1424707635000",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::[YOUR CLOUDTRAIL S3 BUCKET NAME]/*"
+      ]
+    },
+    {
+      "Sid": "Stmt1424707727000",
+      "Effect": "Allow",
+      "Action": [
+        "sqs:DeleteMessage",
+        "sqs:ReceiveMessage"
+      ],
+      "Resource": [
+        "[YOUR SQS ARN]"
+      ]
+    }
+  ]
+}
+```
+
+## Development
+
+#### Contributing
+* Fork the project
+* Add your feature
+* If you are adding new functionality, document it in README.md
+* Add some tests if able.
+* Push the branch up to GitHub.
+* Send a pull request to the appliedtrust/traildash project.
+
+#### Building
+```
+make linux
+make kibana
+make docker
+```
+
