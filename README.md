@@ -3,7 +3,7 @@ Traildash is a powerful dashboard for AWS CloudTrail logs, shipped in an easy-to
 
 ![CloudTrail Dashboard](/readme_images/traildash_screenshot.png)
 
-Configure Traildash with a few environment variables and you're off to the races.
+Configure the Traildash Docker container with a few environment variables, and you're off to the races.
 
 ## Quickstart
 1. [Setup AWS services to support CloudTrail](#setup-cloudtrail-in-aws)
@@ -33,11 +33,7 @@ Configure Traildash with a few environment variables and you're off to the races
 	DEBUG			Enable debugging output.
 
 ## Using traildash outside Docker
-Download Kibana 3.x and uncompress it to "kibana" in the same directory you run `traildash` from.
-
-#### Usage:
-	traildash
-	traildash --version
+We recommend using the appliedtrust/traildash docker container for convenience, as it includes a bundled ElasticSearch instance.  If you'd like to run your own ElasticSearch instance, or simply don't want to use Docker, it's easy to run from the command-line.  The traildash executable is configured with environment variables rather than CLI flags - here's an example:
 
 #### Example Environment Variables
 ```
@@ -50,6 +46,10 @@ export WEB_LISTEN=localhost:7000
 export DEBUG=1
 export SQS_PERSIST=1
 ```
+
+#### Usage:
+	traildash
+	traildash --version
 
 ## How it works 
 1. AWS CloudTrail creates a new log file, stores it in S3, and notifies an SNS topic.
