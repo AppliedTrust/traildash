@@ -7,7 +7,36 @@ Configure Traildash with a few environment variables and you're off to the races
 
 ## Quickstart
 1. [Setup AWS services to support CloudTrail](#setup-cloudtrail-in-aws)
-2. Fill in the "XXX" blanks and run with docker: 
+2. Create a dedicated IAM user with the following inline policy filing in information from S3 bucket name and SQS queue created Step 1. Create an access and download for the next step.
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1424707635000",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::[YOUR CLOUDTRAIL S3 BUCKET NAME]/*"
+      ]
+    },
+    {
+      "Sid": "Stmt1424707727000",
+      "Effect": "Allow",
+      "Action": [
+        "sqs:DeleteMessage",
+        "sqs:ReceiveMessage"
+      ],
+      "Resource": [
+        "[YOUR SQS ARN]"
+      ]
+    }
+  ]
+}
+```
+3. Fill in the "XXX" blanks and run with docker: 
 ```
 docker run -i -d -p 7000:7000 \
 	-e "AWS_ACCESS_KEY_ID=XXX" \
@@ -17,7 +46,7 @@ docker run -i -d -p 7000:7000 \
 	-v /home/traildash:/var/lib/elasticsearch/ \
 	appliedtrust/traildash
 ```
-3. Open http://localhost:7000/ in your browser
+4. Open http://localhost:7000/ in your browser
 
 #### Required Environment Variables:
 	AWS_SQS_URL				AWS SQS URL.
