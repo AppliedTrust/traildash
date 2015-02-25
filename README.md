@@ -1,12 +1,31 @@
 # Traildash: AWS CloudTrail Dashboard
-Traildash is a powerful dashboard for AWS CloudTrail logs, shipped in an easy-to-use docker container.
-
-* Kibana dashboard for your CloudTrail logs
-* Easy to setup: under 15 minutes
-* Avoids granting direct access to your ElasticSearch instance
-* Proxy ensures your ElasticSearch logs are secure and read-only
+Traildash is a simple, yet powerful, dashboard for AWS CloudTrail logs.
 
 ![CloudTrail Dashboard](/readme_images/traildash_screenshot.png)
+
+## What is AWS CloudTrail?
+To quote AWS:
+> [AWS CloudTrail](http://aws.amazon.com/cloudtrail/) is a web service that records AWS API calls for your account and delivers log files to you. The recorded information includes the identity of the API caller, the time of the API call, the source IP address of the API caller, the request parameters, and the response elements returned by the AWS service.
+AWS charges a few dollars a month for CloudTrail for a typical organization.
+
+## Why use Traildash?
+The data in CloudTrail is essential, but it's unfortunately trapped in many tiny JSON files stored in AWS S3.  Traildash grabs those files, stores them in ElasticSearch, and presents a Kibana dashboard so you can analyze recent activity in your AWS account.
+
+#### Answer questions like:
+* Who terminted my EC2 instance?
+* When was that Route53 entry changed?
+* What idiot added 0.0.0.0/0 to the security group?
+
+#### Features
+* Customizable Kibana dashboards for your CloudTrail logs
+* Easy to setup: under 15 minutes
+* Self-contained Kibana 3.1.2 release
+* HTTPS server with custom SSL cert/key or optional self-signed cert
+* Single Linux/OSX binaries
+* Basic Authentication Support (TODO)
+* ElasticSearch proxy ensures your logs are secure and read-only
+  * No need to open direct access to your ElasticSearch instance
+  * Helps to achieve PCI and HIPAA compliance in the cloud
 
 Configure the Traildash Docker container with a few environment variables, and you're off to the races.
 
@@ -26,16 +45,18 @@ Configure the Traildash Docker container with a few environment variables, and y
 1. Open http://localhost:7000/ in your browser
 
 #### Required Environment Variables:
-	AWS_SQS_URL				AWS SQS URL.
 	AWS_ACCESS_KEY_ID		AWS Key ID.
 	AWS_SECRET_ACCESS_KEY	AWS Secret Key.
+	AWS_SQS_URL				AWS SQS URL.
 
 #### Optional Environment Variables:
-	AWS_REGION		AWS Region (SQS and S3 regions must match.  default: us-east-1).
-	ES_URL			ElasticSearch URL (default: http://localhost:9200).
+	AWS_REGION		AWS Region (SQS and S3 regions must match. default: us-east-1).
 	WEB_LISTEN		Listen IP and port for web interface (default: 0.0.0.0:7000).
-	SQS_PERSIST		Set to prevent deleting of finished SQS messages - for debugging.
+	ES_URL			ElasticSearch URL (default: http://localhost:9200).
 	DEBUG			Enable debugging output.
+	SSL_MODE		"off": disable HTTPS and use HTTP (default)
+				"custom": use custom key/cert stored stored in ".tdssl/key.pem" and ".tdssl/cert.pem"
+				"selfSigned": use key/cert in ".tdssl", generate an self-signed cert if empty
 
 ## Using traildash outside Docker
 We recommend using the appliedtrust/traildash docker container for convenience, as it includes a bundled ElasticSearch instance.  If you'd like to run your own ElasticSearch instance, or simply don't want to use Docker, it's easy to run from the command-line.  The traildash executable is configured with environment variables rather than CLI flags - here's an example:
@@ -43,13 +64,12 @@ We recommend using the appliedtrust/traildash docker container for convenience, 
 #### Example Environment Variables
 ```
 export AWS_ACCESS_KEY_ID=AKIXXX
-export AWS_SQS_URL=XXX
 export AWS_SECRET_ACCESS_KEY=XXX
+export AWS_SQS_URL=XXX
 export AWS_REGION=us-east-1
+export WEB_LISTEN=0.0.0.0:7000
 export ES_URL=http://localhost:9200
-export WEB_LISTEN=localhost:7000
 export DEBUG=1
-export SQS_PERSIST=1
 ```
 
 #### Usage:
@@ -122,9 +142,10 @@ export SQS_PERSIST=1
 * Send a pull request to the appliedtrust/traildash project.
 
 #### Building
+TODO: glock notes
 ```
-make linux
-make kibana
-make docker
+make all
 ```
 
+## License
+MIT

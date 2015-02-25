@@ -1,8 +1,5 @@
 package main
 
-//import "github.com/kr/pretty"
-//log.Fatalf("%# v", pretty.Formatter(r.Request))
-
 import (
 	"bytes"
 	"encoding/json"
@@ -23,7 +20,7 @@ import (
 	"time"
 )
 
-const version = "0.7"
+const version = "0.8"
 
 const usage = `traildash: easy AWS CloudTrail dashboard
 
@@ -31,20 +28,42 @@ Usage:
 	traildash
 	traildash --version
 
+Note: traildash uses Environment Vars rather than flags for Docker compatibility.
+
 Required Environment Variables:
-	AWS_SQS_URL			AWS SQS URL.
-	AWS_ACCESS_KEY_ID		AWS Key ID.
-	AWS_SECRET_ACCESS_KEY		AWS Secret Key.
+	AWS_SQS_URL		AWS SQS URL.
+	AWS_ACCESS_KEY_ID	AWS Key ID.
+	AWS_SECRET_ACCESS_KEY	AWS Secret Key.
 
 Optional Environment Variables:
-	AWS_REGION			AWS Region (SQS and S3 regions must match. default: us-east-1).
-	ES_URL				ElasticSearch URL (default: http://localhost:9200).
-	WEB_LISTEN			Listen IP and port for web interface (default: 0.0.0.0:7000).
-	SQS_PERSIST			Set to prevent deleting of finished SQS messages - for debugging.
-	DEBUG				Enable debugging output.
+	AWS_REGION		AWS Region (SQS and S3 regions must match. default: us-east-1).
+	ES_URL			ElasticSearch URL (default: http://localhost:9200).
+	WEB_LISTEN		Listen IP and port for HTTP/HTTPS interface (default: 0.0.0.0:7000).
+	SSL_MODE		"off": disable HTTPS and use HTTP (default)
+				"custom": use custom key/cert stored stored in ".tdssl/key.pem" and ".tdssl/cert.pem"
+				"selfSigned": use key/cert in ".tdssl", generate an self-signed cert if empty
+	SQS_PERSIST		Set to prevent deleting of finished SQS messages - for debugging.
+	DEBUG			Enable debugging output.
 `
 
 const esPath = "cloudtrail/event"
+
+type sslModeOption int
+
+const (
+	SSLoff        sslModeOption = 0
+	SSLcustom     sslModeOption = 1
+	SSLselfSigned sslModeOption = 2
+	SSLcertDir                  = ".tdssl/"
+	SSLcertFile                 = SSLcertDir + "cert.pem"
+	SSLkeyFile                  = SSLcertDir + "key.pem"
+)
+
+var sslModeOptionMap = map[string]sslModeOption{
+	"off":        SSLoff,
+	"custom":     SSLcustom,
+	"selfSigned": SSLselfSigned,
+}
 
 type config struct {
 	awsKeyId   string
@@ -55,6 +74,7 @@ type config struct {
 	listen     string
 	authUser   string
 	authPw     string
+	sslMode    sslModeOption
 	debugOn    bool
 	sqsPersist bool
 }
@@ -102,7 +122,7 @@ type cloudtrailRecord struct {
 func main() {
 	c, err := parseArgs()
 	if err != nil {
-		fmt.Printf("Error parsing arguments: %s\n", err.Error())
+		fmt.Printf("Error parsing arguments: %s\n\n", err.Error())
 		fmt.Println(usage)
 		os.Exit(1)
 	}
@@ -110,6 +130,7 @@ func main() {
 	go c.workLogs()
 	go c.serveKibana()
 
+	log.Print("Started")
 	sig := make(chan os.Signal)
 	signal.Notify(sig, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM)
 	for {
@@ -123,15 +144,16 @@ func main() {
 
 // serveKibana runs a webserver for 1. kibana and 2. elasticsearch proxy
 func (c *config) serveKibana() {
-	//http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
-	//http.FileServer(http.Dir("kibana")).ServeHTTP(res, req)
-	//})
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		webStaticHandler(w, r)
 	})
-
 	http.HandleFunc("/es/", c.proxyHandler)
-	http.ListenAndServe(c.listen, nil)
+	if c.sslMode == SSLoff {
+		http.ListenAndServe(c.listen, nil)
+	} else {
+		http.ListenAndServeTLS(c.listen, SSLcertFile, SSLkeyFile, nil)
+	}
+	log.Print("Web server exit")
 }
 
 // webStaticHandler serves embedded static web files (js&css)
@@ -142,7 +164,7 @@ func webStaticHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	staticAsset, err := Asset(assetPath)
 	if err != nil {
-		log.Printf("Static asset error: %s", err.Error())
+		log.Printf("Kibana web error: %s", err.Error())
 		http.NotFound(w, r)
 		return
 	}
@@ -151,6 +173,8 @@ func webStaticHandler(w http.ResponseWriter, r *http.Request) {
 		headers["Content-Type"] = []string{"application/javascript"}
 	} else if strings.HasSuffix(assetPath, ".css") {
 		headers["Content-Type"] = []string{"text/css"}
+	} else if strings.HasSuffix(assetPath, ".html") {
+		headers["Content-Type"] = []string{"text/html"}
 	}
 	io.Copy(w, bytes.NewReader(staticAsset))
 }
@@ -369,7 +393,7 @@ func (c *config) deleteSQS(m *cloudtrailNotification) error {
 }
 
 // parseArgs handles CLI flags and env vars
-func parseArgs() (config, error) {
+func parseArgs() (*config, error) {
 	c := config{}
 
 	var verPtr bool
@@ -390,12 +414,12 @@ func parseArgs() (config, error) {
 
 	c.queueURL = os.Getenv("AWS_SQS_URL")
 	if len(c.queueURL) < 1 {
-		return c, fmt.Errorf("Must specify SQS url with -Q flag or by setting AWS_SQS_URL env var.")
+		return nil, fmt.Errorf("Must specify SQS url with -Q flag or by setting AWS_SQS_URL env var.")
 	}
 	c.awsKeyId = os.Getenv("AWS_ACCESS_KEY_ID")
 	c.awsSecret = os.Getenv("AWS_SECRET_ACCESS_KEY")
 	if len(c.awsKeyId) < 1 || len(c.awsSecret) < 1 {
-		return c, fmt.Errorf("Must use -K and -S options or set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.")
+		return nil, fmt.Errorf("Must use -K and -S options or set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.")
 	}
 	c.region = os.Getenv("AWS_REGION")
 	if len(c.region) < 1 {
@@ -417,7 +441,35 @@ func parseArgs() (config, error) {
 		c.sqsPersist = true
 	}
 
-	return c, nil
+	c.sslMode = SSLoff
+	if len(os.Getenv("SSL_MODE")) > 0 {
+		var ok bool
+		c.sslMode, ok = sslModeOptionMap[os.Getenv("SSL_MODE")]
+		if !ok {
+			return nil, fmt.Errorf("Invalid SSL_MODE.  Must be one of 'off', 'selfSigned', or 'custom'.")
+		}
+	}
+
+	if c.sslMode != SSLoff {
+		// look for existing ".tdssl/key.pem" and ".tdssl/cert.pem"
+		_, keyErr := os.Stat(SSLkeyFile)
+		_, certErr := os.Stat(SSLcertFile)
+		if os.IsNotExist(keyErr) && os.IsNotExist(certErr) && c.sslMode == SSLselfSigned {
+			if _, dirErr := os.Stat(SSLcertDir); os.IsNotExist(dirErr) {
+				if err := os.Mkdir(SSLcertDir, 0700); err != nil {
+					return nil, fmt.Errorf("Error creating SSL cert directory at %s: %s", SSLcertDir, err.Error())
+				}
+			}
+			if err := generateCert(SSLcertFile, SSLkeyFile); err != nil {
+				return nil, fmt.Errorf("Error generating a self-signed SSL cert: %s", err.Error())
+			}
+			log.Printf("Created new self-signed SSL cert in %s.", SSLcertDir)
+		} else if os.IsNotExist(keyErr) || os.IsNotExist(certErr) {
+			return nil, fmt.Errorf("SSL key or cert missing. Expected at %s and %s", SSLcertFile, SSLkeyFile)
+		}
+	}
+
+	return &c, nil
 }
 
 // debug reports stuff if debugging is on
@@ -427,7 +479,7 @@ func (c *config) debug(format string, m ...interface{}) {
 	}
 }
 
-// kerblowie handles API failures "gracefully"	TODO: consider https://github.com/afex/hystrix-go
+// kerblowie handles API failures "gracefully"... hah
 func kerblowie(format string, s ...interface{}) {
 	log.Printf(format, s...)
 	time.Sleep(5 * time.Second)

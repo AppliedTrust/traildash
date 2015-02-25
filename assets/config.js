@@ -30,7 +30,7 @@ function (Settings) {
      *
      */
     //elasticsearch: "http://"+window.location.hostname+":9200",
-    elasticsearch: "http://"+window.location.hostname+":"+window.location.port+"/es",
+    elasticsearch: "//"+window.location.hostname+":"+window.location.port+"/es",
 
     /** @scratch /configuration/config.js/5
      *
