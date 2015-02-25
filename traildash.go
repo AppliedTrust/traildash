@@ -23,7 +23,7 @@ import (
 	"time"
 )
 
-const version = "0.6"
+const version = "0.7"
 
 const usage = `traildash: easy AWS CloudTrail dashboard
 
@@ -123,11 +123,36 @@ func main() {
 
 // serveKibana runs a webserver for 1. kibana and 2. elasticsearch proxy
 func (c *config) serveKibana() {
-	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
-		http.FileServer(http.Dir("kibana")).ServeHTTP(res, req)
+	//http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
+	//http.FileServer(http.Dir("kibana")).ServeHTTP(res, req)
+	//})
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		webStaticHandler(w, r)
 	})
+
 	http.HandleFunc("/es/", c.proxyHandler)
 	http.ListenAndServe(c.listen, nil)
+}
+
+// webStaticHandler serves embedded static web files (js&css)
+func webStaticHandler(w http.ResponseWriter, r *http.Request) {
+	assetPath := "kibana/" + r.URL.Path[1:]
+	if assetPath == "kibana/" {
+		assetPath = "kibana/index.html"
+	}
+	staticAsset, err := Asset(assetPath)
+	if err != nil {
+		log.Printf("Static asset error: %s", err.Error())
+		http.NotFound(w, r)
+		return
+	}
+	headers := w.Header()
+	if strings.HasSuffix(assetPath, ".js") {
+		headers["Content-Type"] = []string{"application/javascript"}
+	} else if strings.HasSuffix(assetPath, ".css") {
+		headers["Content-Type"] = []string{"text/css"}
+	}
+	io.Copy(w, bytes.NewReader(staticAsset))
 }
 
 // proxyHandler securely proxies requests to the ElasticSearch instance
@@ -325,7 +350,6 @@ func (c *config) load(records *[]cloudtrailRecord) error {
 		body, _ := ioutil.ReadAll(resp.Body)
 		return fmt.Errorf("Error response from Elasticsearch: %s %s", resp.Status, string(body))
 	}
-	c.debug("Upload OK: %s\n", url)
 	return nil
 }
 

@@ -1,6 +1,11 @@
 # Traildash: AWS CloudTrail Dashboard
 Traildash is a powerful dashboard for AWS CloudTrail logs, shipped in an easy-to-use docker container.
 
+* Kibana dashboard for your CloudTrail logs
+* Easy to setup: under 15 minutes
+* Avoids granting direct access to your ElasticSearch instance
+* Proxy ensures your ElasticSearch logs are secure and read-only
+
 ![CloudTrail Dashboard](/readme_images/traildash_screenshot.png)
 
 Configure the Traildash Docker container with a few environment variables, and you're off to the races.
