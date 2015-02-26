@@ -22,7 +22,6 @@ The data in CloudTrail is essential, but it's unfortunately trapped in many tiny
 * Self-contained Kibana 3.1.2 release
 * HTTPS server with custom SSL cert/key or optional self-signed cert
 * Single Linux/OSX binaries
-* Basic Authentication Support (TODO)
 * ElasticSearch proxy ensures your logs are secure and read-only
   * No need to open direct access to your ElasticSearch instance
   * Helps to achieve PCI and HIPAA compliance in the cloud
@@ -149,6 +148,9 @@ $ git clone <your fork>
 $ glock sync github.com/appliedtrust/traildash
 $ make
 ```
+
+To cross-compile, you'll need to follow these steps first:
+http://dave.cheney.net/2012/09/08/an-introduction-to-cross-compilation-with-go
 
 ## License
 MIT
