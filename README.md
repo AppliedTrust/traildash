@@ -12,7 +12,7 @@ AWS charges a few dollars a month for CloudTrail for a typical organization.
 The data in CloudTrail is essential, but it's unfortunately trapped in many tiny JSON files stored in AWS S3.  Traildash grabs those files, stores them in ElasticSearch, and presents a Kibana dashboard so you can analyze recent activity in your AWS account.
 
 #### Answer questions like:
-* Who terminted my EC2 instance?
+* Who terminated my EC2 instance?
 * When was that Route53 entry changed?
 * What idiot added 0.0.0.0/0 to the security group?
 
