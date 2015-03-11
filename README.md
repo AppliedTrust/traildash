@@ -130,6 +130,13 @@ export DEBUG=1
 }
 ```
 
+## Backfilling data
+Traildash will only pull in data which is being added after the above has been configured, so if you have logs from before this was configured you will have to backfill that data. To make that easier you can use the `backfill.py` Python script provided to notify Traildash of the older data.
+
+The script relies on the same environment variables mentioned above, but also requires a `AWS_S3_BUCKET` variable with the name of the S3 bucket that holds your CloudTrail files. The script also requires some extra permissions than the user for CloudTrail requires, as it needs to list the files in the S3 bucket and also add items to the SQS queue.
+
+The only dependency outside of Python itself is the AWS library, Boto3. It can be installed by running `pip install boto3`.
+
 ## Development
 
 #### Contributing
