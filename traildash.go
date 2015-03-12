@@ -32,6 +32,8 @@ Note: traildash uses Environment Vars rather than flags for Docker compatibility
 
 Required Environment Variables:
 	AWS_SQS_URL		AWS SQS URL.
+
+AWS credentials are sourced by (in order): Environment Variables, ~/.aws/credentials, IAM profiles.
 	AWS_ACCESS_KEY_ID	AWS Key ID.
 	AWS_SECRET_ACCESS_KEY	AWS Secret Key.
 
@@ -286,7 +288,7 @@ func (c *config) workLogs() {
 // dequeue fetches an item from SQS
 func (c *config) dequeue() (*cloudtrailNotification, error) {
 	numRequested := 1
-	creds := aws.Creds(c.awsKeyId, c.awsSecret, "")
+	creds := aws.DetectCreds(c.awsKeyId, c.awsSecret, "")
 	q := sqs.New(creds, c.region, nil)
 
 	req := sqs.ReceiveMessageRequest{
@@ -325,7 +327,7 @@ func (c *config) download(m *cloudtrailNotification) (*[]cloudtrailRecord, error
 	if len(m.S3ObjectKey) != 1 {
 		return nil, fmt.Errorf("Expected one S3 key but got %d", len(m.S3ObjectKey[0]))
 	}
-	creds := aws.Creds(c.awsKeyId, c.awsSecret, "")
+	creds := aws.DetectCreds(c.awsKeyId, c.awsSecret, "")
 	s := s3.New(creds, c.region, nil) // TODO: bucket must be in same region as SQS queue: lookup bucket region.
 	q := s3.GetObjectRequest{
 		Bucket: aws.String(m.S3Bucket),
@@ -379,7 +381,7 @@ func (c *config) load(records *[]cloudtrailRecord) error {
 
 // deleteSQS removes a completed notification from the queue
 func (c *config) deleteSQS(m *cloudtrailNotification) error {
-	creds := aws.Creds(c.awsKeyId, c.awsSecret, "")
+	creds := aws.DetectCreds(c.awsKeyId, c.awsSecret, "")
 	q := sqs.New(creds, c.region, nil)
 	req := sqs.DeleteMessageRequest{
 		QueueURL:      aws.String(c.queueURL),
@@ -418,9 +420,6 @@ func parseArgs() (*config, error) {
 	}
 	c.awsKeyId = os.Getenv("AWS_ACCESS_KEY_ID")
 	c.awsSecret = os.Getenv("AWS_SECRET_ACCESS_KEY")
-	if len(c.awsKeyId) < 1 || len(c.awsSecret) < 1 {
-		return nil, fmt.Errorf("Must use -K and -S options or set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.")
-	}
 	c.region = os.Getenv("AWS_REGION")
 	if len(c.region) < 1 {
 		c.region = "us-east-1"

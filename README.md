@@ -44,9 +44,23 @@ Configure the Traildash Docker container with a few environment variables, and y
 1. Open http://localhost:7000/ in your browser
 
 #### Required Environment Variables:
-	AWS_ACCESS_KEY_ID		AWS Key ID.
-	AWS_SECRET_ACCESS_KEY	AWS Secret Key.
-	AWS_SQS_URL				AWS SQS URL.
+        AWS_SQS_URL              AWS SQS URL.
+
+#### AWS Credentials
+AWS Credentials can be provided by either:
+
+1. Environment Variables
+
+        AWS_ACCESS_KEY_ID       AWS Key ID.
+        AWS_SECRET_ACCESS_KEY   AWS Secret Key.
+
+1. Config file (SDK standard format), ~/.aws/credentials
+
+        [default]
+        aws_access_key_id = ACCESS_KEY
+        aws_secret_access_key = SECRET_KEY
+
+1. IAM roles/profiles
 
 #### Optional Environment Variables:
 	AWS_REGION		AWS Region (SQS and S3 regions must match. default: us-east-1).
