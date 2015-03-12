@@ -176,7 +176,7 @@ func kibana_app_dashboards_default_json() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "kibana/app/dashboards/default.json", size: 8681, mode: os.FileMode(436), modTime: time.Unix(1424966498, 0)}
+	info := bindata_file_info{name: "kibana/app/dashboards/default.json", size: 8681, mode: os.FileMode(436), modTime: time.Unix(1424968096, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -2316,7 +2316,7 @@ func kibana_config_js() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "kibana/config.js", size: 2379, mode: os.FileMode(436), modTime: time.Unix(1424966498, 0)}
+	info := bindata_file_info{name: "kibana/config.js", size: 2379, mode: os.FileMode(436), modTime: time.Unix(1424968096, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }

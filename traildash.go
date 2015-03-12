@@ -20,7 +20,7 @@ import (
 	"time"
 )
 
-const version = "0.8"
+const version = "0.0.9"
 
 const usage = `traildash: easy AWS CloudTrail dashboard
 
@@ -250,8 +250,7 @@ func (c *config) workLogs() {
 			kerblowie("Error dequeing from SQS: %s", err.Error())
 			continue
 		} else if m == nil {
-			log.Printf("Empty queue... sleeping for a minute.")
-			time.Sleep(60 * time.Second)
+			log.Printf("Empty queue... polling for 20 seconds.")
 			continue
 		}
 		c.debug("Fetched sqs://%s [s3://%s/%s]", m.MessageID, m.S3Bucket, m.S3ObjectKey[0])
@@ -294,6 +293,7 @@ func (c *config) dequeue() (*cloudtrailNotification, error) {
 	req := sqs.ReceiveMessageRequest{
 		QueueURL:            aws.String(c.queueURL),
 		MaxNumberOfMessages: aws.Integer(numRequested),
+		WaitTimeSeconds:     aws.Integer(20), // max allowed
 	}
 	resp, err := q.ReceiveMessage(&req)
 	if err != nil {
@@ -310,15 +310,20 @@ func (c *config) dequeue() (*cloudtrailNotification, error) {
 
 	not := sqsNotification{}
 	if err := json.Unmarshal([]byte(body), &not); err != nil {
-		return nil, fmt.Errorf("Outer JSON Unmarshal error [id: %s]: %s", not.MessageID, err.Error())
+		return nil, fmt.Errorf("SQS message JSON error [id: %s]: %s", not.MessageID, err.Error())
 	}
 
 	n := cloudtrailNotification{}
-	if err := json.Unmarshal([]byte(not.Message), &n); err != nil {
-		return nil, fmt.Errorf("Inner JSON Unmarshal error [id: %s]: %s", not.MessageID, err.Error())
-	}
 	n.MessageID = not.MessageID
 	n.ReceiptHandle = *m.ReceiptHandle
+	if not.Message == "CloudTrail validation message." { // swallow validation messages
+		if err = c.deleteSQS(&n); err != nil {
+			return nil, fmt.Errorf("Error deleting CloudTrail validation message [id: %s]: %s", not.MessageID, err.Error())
+		}
+		return nil, fmt.Errorf("Deleted CloudTrail validation message id %s", not.MessageID)
+	} else if err := json.Unmarshal([]byte(not.Message), &n); err != nil {
+		return nil, fmt.Errorf("CloudTrail JSON error [id: %s]: %s", not.MessageID, err.Error())
+	}
 	return &n, nil
 }
 

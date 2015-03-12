@@ -21,7 +21,7 @@ The data in CloudTrail is essential, but it's unfortunately trapped in many tiny
 * Easy to setup: under 15 minutes
 * Self-contained Kibana 3.1.2 release
 * HTTPS server with custom SSL cert/key or optional self-signed cert
-* Single Linux/OSX binaries
+* Easy-to-deploy Linux/OSX binaries, or a Docker image
 * ElasticSearch proxy ensures your logs are secure and read-only
   * No need to open direct access to your ElasticSearch instance
   * Helps to achieve PCI and HIPAA compliance in the cloud
@@ -172,6 +172,13 @@ $ make
 
 To cross-compile, you'll need to follow these steps first:
 http://dave.cheney.net/2012/09/08/an-introduction-to-cross-compilation-with-go
+
+## Contributors
+* [nmcclain](https://github.com/nmcclain)
+* [matthewrkrieger](https://github.com/matthewrkrieger)
+* [swindmill](https://github.com/swindmill)
+* [atward](https://github.com/atward)
+* [Tenzer](https://github.com/Tenzer)
 
 ## License
 MIT
