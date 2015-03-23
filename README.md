@@ -30,7 +30,7 @@ Configure the Traildash Docker container with a few environment variables, and y
 
 ## Quickstart
 1. [Setup AWS services to support CloudTrail](#setup-cloudtrail-in-aws)
-1. Fill in the "XXX" blanks and run with docker: 
+1. Fill in the "XXX" blanks and run with docker:
 
 	```
 	docker run -i -d -p 7000:7000 \
@@ -89,7 +89,7 @@ export DEBUG=1
 	traildash
 	traildash --version
 
-## How it works 
+## How it works
 1. AWS CloudTrail creates a new log file, stores it in S3, and notifies an SNS topic.
 1. The SNS topic notifes a dedicated SQS queue about the new log file in S3.
 1. Traildash polls the SQS queue and downloads new log files from S3.
@@ -98,29 +98,56 @@ export DEBUG=1
 1. Traildash protects access to ElasticSearch, ensuring logs are read-only.
 
 ## Setup CloudTrail in AWS
-1. In your primary region, turn on CloudTrail: ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_01.png)
-1. Tell CloudTrail to create a new S3 bucket and SNS topic: ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_02.png)
-1. Switch to SNS in your AWS console to view your SNS topic and copy its ARN to your clipboard: ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_03.png)
-1. Switch to SQS in your AWS console and create a new SQS queue - okay to stick with default options: ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_04.png) ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_05.png)
-1. Select your SQS queue, click the "permissions" tab, then click "Add a Permission": ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_06.png)
-1. Click "Everybody", and click the "SendMessage" action: ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_07.png)
-1. Change the Key to "aws:SourceArn", paste in your SNS topic ARN from your clipboard, then click "Add Condition": ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_08.png)
-1. Click "Add Permission": ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_09.png)
-1. Copy your SQS queue's ARN to your clipboard: ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_10.png)
-1. Switch back to your SNS topic, and click "Add Subscription": ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_12.png)
-1. Paste in your SQS queue's URL from your clipboard:  ![CloudTrail setup](/readme_images/AWS_CloudTrail_Setup_13.png)
-1. To add other regions:
-  1. Configure all regions to use the same S3 bucket.
-  1. Configure your SQS queue to permit each region's SNS topic.
-  1. Subscribe your central SQS queue to each region's SNS topic.
-  1. Disable the CloudTrail "global events" option for all but your primary region.
-1. Finally, create a dedicated IAM user with the following inline policy, filing in information from the S3 bucket name and SQS queue ARN from above. Create an API access key and download to a safe place.
+1. Turn on CloudTrail in each region, telling CloudTrail to create a new S3 bucket and SNS topic: ![CloudTrail setup](/readme_images/CloudTrail_Setup.png)
+1. If your Traildash instance will be launched in a different AWS account, you must add a bucket policy to your CloudTrail bucket allowing that account access.
+```
+{
+  "Id": "AllowTraildashAccountAccess",
+  "Statement": [
+    {
+      "Sid": "AllowTraildashBucketAccess",
+      "Action": [
+        "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::<your-bucket-name>",
+      "Principal": {
+        "AWS": [
+          "<TRAILDASH ACCOUNT ID>"
+        ]
+      }
+    },
+    {
+      "Sid": "AllowTraildashObjectAccess",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::<your-bucket-name>/*",
+      "Principal": {
+        "AWS": [
+          "<TRAILDASH ACCOUNT ID>"
+        ]
+      }
+    }
+  ]
+}
+```
+
+1. Switch to SNS in your AWS console to view your SNS topic and edit the topic policy: ![CloudTrail setup](/readme_images/SNS_Edit_Topic_Policy.png)
+1. Restrict topic access to only allow SQS subscriptions. If you your Traildash instance is launched in the same AWS account, continue on to the next step. If you need Traildash in an outside account to access this topic, allow subscriptions from the AWS account ID that owns your Traildash SQS queue. (If traildash is running the same account, leave "Only me" checked for subscriptions)
+![CloudTrail setup](/readme_images/SNS_Basic_Policy.png)
+1. Switch to SQS in your AWS console and create a new SQS queue - okay to stick with default options.
+1. With your new SQS queue selected, click Queue Actions and "Subscribe Queue to SNS Topic"
+![CloudTrail setup](/readme_images/Traildash_SQS1.png)
+1. Enter the ARN of your SNS Topic and click Subscribe. Repeat for each CloudTrail SNS Topic you have created. If you encounter any errors in this step, ensure you have created the correct permissions on each SNS topic. ![CloudTrail setup](/readme_images/SQS_Subscribe_to_Topic.png)
+1. Create a managed IAM policy with the following policy document, filing in information from the S3 bucket name and SQS queue ARN from above.
 ```
 {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "Stmt1424707635000",
+      "Sid": "AllowS3BucketAccess",
       "Effect": "Allow",
       "Action": [
         "s3:GetObject"
@@ -130,7 +157,7 @@ export DEBUG=1
       ]
     },
     {
-      "Sid": "Stmt1424707727000",
+      "Sid": "AllowSQS",
       "Effect": "Allow",
       "Action": [
         "sqs:DeleteMessage",
@@ -143,6 +170,12 @@ export DEBUG=1
   ]
 }
 ```
+![CloudTrail setup](/readme_images/IAM_Managed_Policy.png)
+1. Create a new EC2 instance role in IAM and attach your Traildash policy to it.
+![CloudTrail setup](/readme_images/IAM_Create_Role.png)
+![CloudTrail setup](/readme_images/IAM_Role_Review.png)
+1. Be sure to select this role when launching your Traildash instance!
+![CloudTrail setup](/readme_images/EC2_Select_Role.png)
 
 ## Backfilling data
 Traildash will only pull in data which is being added after the above has been configured, so if you have logs from before this was configured you will have to backfill that data. To make that easier you can use the `backfill.py` Python script provided to notify Traildash of the older data.
