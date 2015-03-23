@@ -29,7 +29,7 @@ The data in CloudTrail is essential, but it's unfortunately trapped in many tiny
 Configure the Traildash Docker container with a few environment variables, and you're off to the races.
 
 ## Quickstart
-1. [Setup AWS services to support CloudTrail](#setup-cloudtrail-in-aws)
+1. [Setup Traildash in AWS](#setup-traildash-in-aws)
 1. Fill in the "XXX" blanks and run with docker:
 
 	```
@@ -49,8 +49,8 @@ Configure the Traildash Docker container with a few environment variables, and y
 #### AWS Credentials
 AWS Credentials can be provided by either:
 
+1. IAM roles/profiles (See [Setup Traildash in AWS](#setup-traildash-in-aws))
 1. Environment Variables
-
         AWS_ACCESS_KEY_ID       AWS Key ID.
         AWS_SECRET_ACCESS_KEY   AWS Secret Key.
 
@@ -60,7 +60,6 @@ AWS Credentials can be provided by either:
         aws_access_key_id = ACCESS_KEY
         aws_secret_access_key = SECRET_KEY
 
-1. IAM roles/profiles
 
 #### Optional Environment Variables:
 	AWS_REGION		AWS Region (SQS and S3 regions must match. default: us-east-1).
@@ -97,7 +96,7 @@ export DEBUG=1
 1. Kibana provides beautiful dashboards to view the logs stored in ElasticSearch.
 1. Traildash protects access to ElasticSearch, ensuring logs are read-only.
 
-## Setup CloudTrail in AWS
+## Setup Traildash in AWS
 1. Turn on CloudTrail in each region, telling CloudTrail to create a new S3 bucket and SNS topic: ![CloudTrail setup](/readme_images/CloudTrail_Setup.png)
 1. If your Traildash instance will be launched in a different AWS account, you must add a bucket policy to your CloudTrail bucket allowing that account access.
 ```
@@ -133,7 +132,6 @@ export DEBUG=1
   ]
 }
 ```
-
 1. Switch to SNS in your AWS console to view your SNS topic and edit the topic policy: ![CloudTrail setup](/readme_images/SNS_Edit_Topic_Policy.png)
 1. Restrict topic access to only allow SQS subscriptions. If you your Traildash instance is launched in the same AWS account, continue on to the next step. If you need Traildash in an outside account to access this topic, allow subscriptions from the AWS account ID that owns your Traildash SQS queue. (If traildash is running the same account, leave "Only me" checked for subscriptions)
 ![CloudTrail setup](/readme_images/SNS_Basic_Policy.png)
@@ -171,7 +169,7 @@ export DEBUG=1
 }
 ```
 ![CloudTrail setup](/readme_images/IAM_Managed_Policy.png)
-1. Create a new EC2 instance role in IAM and attach your Traildash policy to it.
+1. Create a new EC2 instance role in IAM and attach your Traildash policy to it. *Note: Use of IAM roles is NOT required however it is strongly recommended for security best practice.*
 ![CloudTrail setup](/readme_images/IAM_Create_Role.png)
 ![CloudTrail setup](/readme_images/IAM_Role_Review.png)
 1. Be sure to select this role when launching your Traildash instance!
