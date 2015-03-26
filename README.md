@@ -37,6 +37,7 @@ Configure the Traildash Docker container with a few environment variables, and y
 		-e "AWS_ACCESS_KEY_ID=XXX" \
 		-e "AWS_SECRET_ACCESS_KEY=XXX" \
 		-e "AWS_SQS_URL=https://XXX" \
+		-e "AWS_REGION=XXX"
 		-e "DEBUG=1" \
 		-v /home/traildash:/var/lib/elasticsearch/ \
 		appliedtrust/traildash
@@ -59,6 +60,7 @@ AWS Credentials can be provided by either:
         [default]
         aws_access_key_id = ACCESS_KEY
         aws_secret_access_key = SECRET_KEY
+        region = AWS_REGION
 
 
 #### Optional Environment Variables:
