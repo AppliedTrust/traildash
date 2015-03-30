@@ -6,8 +6,8 @@ import (
 	"flag"
 	"fmt"
 	"github.com/awslabs/aws-sdk-go/aws"
-	"github.com/awslabs/aws-sdk-go/gen/s3"
-	"github.com/awslabs/aws-sdk-go/gen/sqs"
+	"github.com/awslabs/aws-sdk-go/service/s3"
+	"github.com/awslabs/aws-sdk-go/service/sqs"
 	"io"
 	"io/ioutil"
 	"log"
@@ -70,6 +70,7 @@ var sslModeOptionMap = map[string]sslModeOption{
 type config struct {
 	awsKeyId   string
 	awsSecret  string
+	awsConfig  aws.Config
 	region     string
 	queueURL   string
 	esURL      string
@@ -287,13 +288,12 @@ func (c *config) workLogs() {
 // dequeue fetches an item from SQS
 func (c *config) dequeue() (*cloudtrailNotification, error) {
 	numRequested := 1
-	creds := aws.DetectCreds(c.awsKeyId, c.awsSecret, "")
-	q := sqs.New(creds, c.region, nil)
+	q := sqs.New(&c.awsConfig)
 
-	req := sqs.ReceiveMessageRequest{
+	req := sqs.ReceiveMessageInput{
 		QueueURL:            aws.String(c.queueURL),
-		MaxNumberOfMessages: aws.Integer(numRequested),
-		WaitTimeSeconds:     aws.Integer(20), // max allowed
+		MaxNumberOfMessages: aws.Long(int64(numRequested)),
+		WaitTimeSeconds:     aws.Long(20), // max allowed
 	}
 	resp, err := q.ReceiveMessage(&req)
 	if err != nil {
@@ -332,9 +332,8 @@ func (c *config) download(m *cloudtrailNotification) (*[]cloudtrailRecord, error
 	if len(m.S3ObjectKey) != 1 {
 		return nil, fmt.Errorf("Expected one S3 key but got %d", len(m.S3ObjectKey[0]))
 	}
-	creds := aws.DetectCreds(c.awsKeyId, c.awsSecret, "")
-	s := s3.New(creds, c.region, nil) // TODO: bucket must be in same region as SQS queue: lookup bucket region.
-	q := s3.GetObjectRequest{
+	s := s3.New(&c.awsConfig)
+	q := s3.GetObjectInput{
 		Bucket: aws.String(m.S3Bucket),
 		Key:    aws.String(m.S3ObjectKey[0]),
 	}
@@ -386,13 +385,12 @@ func (c *config) load(records *[]cloudtrailRecord) error {
 
 // deleteSQS removes a completed notification from the queue
 func (c *config) deleteSQS(m *cloudtrailNotification) error {
-	creds := aws.DetectCreds(c.awsKeyId, c.awsSecret, "")
-	q := sqs.New(creds, c.region, nil)
-	req := sqs.DeleteMessageRequest{
+	q := sqs.New(&c.awsConfig)
+	req := sqs.DeleteMessageInput{
 		QueueURL:      aws.String(c.queueURL),
 		ReceiptHandle: aws.String(m.ReceiptHandle),
 	}
-	err := q.DeleteMessage(&req)
+	_, err := q.DeleteMessage(&req)
 	if err != nil {
 		return err
 	}
@@ -425,6 +423,8 @@ func parseArgs() (*config, error) {
 	}
 	c.awsKeyId = os.Getenv("AWS_ACCESS_KEY_ID")
 	c.awsSecret = os.Getenv("AWS_SECRET_ACCESS_KEY")
+	creds := aws.DetectCreds(c.awsKeyId, c.awsSecret, "")
+	c.awsConfig = aws.Config{Credentials: creds, Region: c.region}
 	c.region = os.Getenv("AWS_REGION")
 	if len(c.region) < 1 {
 		c.region = "us-east-1"
