@@ -3,8 +3,8 @@ KIBANA_VERSION=3.1.2
 
 deps:
 	# points links to new locations
-	go get github.com/awslabs/aws-sdk-go/s3
-	go get github.com/awslabs/aws-sdk-go/sqs
+	go get github.com/awslabs/aws-sdk-go/service/s3
+	go get github.com/awslabs/aws-sdk-go/service/sqs
 	glock sync github.com/appliedtrust/traildash
 
 dist-clean:
