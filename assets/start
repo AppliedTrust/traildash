@@ -2,6 +2,6 @@
 
 /etc/init.d/elasticsearch start
 echo "waiting for elasticsearch to warm up"
-sleep 10
+sleep 20
 cd /usr/local/traildash; ./traildash
 
