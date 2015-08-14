@@ -94,42 +94,11 @@ type sqsNotification struct {
 	UnsubscribeURL   string
 }
 
-type S3 struct {
-	ConfigurationId string   `json:"configurationId"`
-	Bucket          S3Bucket `json:"bucket"`
-	Object          S3Object `json:"object"`
-}
-
-type S3Object struct {
-	Key  string `json:"key"`
-	Size int64  `json:"size"`
-	ETag string `json:"eTag"`
-}
-
-type S3Bucket struct {
-	Name          string                 `json:"name"`
-	OwnerIdentity map[string]interface{} `json:"ownerIdentity"`
-	Arn           string                 `json:"arn"`
-}
-
 type cloudtrailNotification struct {
-	Records []cloudtrailNotificationRecord `json:"Records"`
-}
-
-type cloudtrailNotificationRecord struct {
-	EventVersion      string                 `json:"eventVersion"`
-	EventSource       string                 `json:"eventSource"`
-	AwsRegion         string                 `json:"awsRegion"`
-	EventTime         string                 `json:"eventTime"`
-	EventName         string                 `json:"eventName"`
-	UserIdentity      map[string]interface{} `json:"userIdentity"`
-	RequestParameters map[string]interface{} `json:"requestParameters"`
-	ResponseElements  map[string]interface{} `json:"responseElements"`
-	S3                S3                     `json:"s3"`
-	ConfigurationId   string                 `json:"configurationId"`
-
-	MessageID     string `json:"-"`
-	ReceiptHandle string `json:"-"`
+	S3Bucket      string
+	S3ObjectKey   []string
+	MessageID     string
+	ReceiptHandle string
 }
 
 type cloudtrailLog struct {
@@ -285,7 +254,7 @@ func (c *config) workLogs() {
 			log.Printf("Empty queue... polling for 20 seconds.")
 			continue
 		}
-		c.debug("Fetched sqs://%s [s3://%s/%s]", m.MessageID, m.S3.Bucket.Name, m.S3.Object.Key)
+		c.debug("Fetched sqs://%s [s3://%s/%s]", m.MessageID, m.S3Bucket, m.S3ObjectKey[0])
 
 		// download from S3
 		records, err := c.download(m)
@@ -293,31 +262,31 @@ func (c *config) workLogs() {
 			kerblowie("Error downloading from S3: %s", err.Error())
 			continue
 		}
-		c.debug("Downloaded %d records from sqs://%s [s3://%s/%s]", len(*records), m.MessageID, m.S3.Bucket.Name, m.S3.Object.Key)
+		c.debug("Downloaded %d records from sqs://%s [s3://%s/%s]", len(*records), m.MessageID, m.S3Bucket, m.S3ObjectKey[0])
 
 		// load into elasticsearch
 		if err = c.load(records); err != nil {
 			kerblowie("Error uploading to ElasticSearch: %s", err.Error())
 			continue
 		}
-		c.debug("Uploaded sqs://%s [s3://%s/%s] to es://%s", m.MessageID, m.S3.Bucket.Name, m.S3.Object.Key, esPath)
+		c.debug("Uploaded sqs://%s [s3://%s/%s] to es://%s", m.MessageID, m.S3Bucket, m.S3ObjectKey[0], esPath)
 
 		// delete message from sqs
 		if c.sqsPersist {
-			c.debug("NOT DELETING sqs://%s [s3://%s/%s]", m.MessageID, m.S3.Bucket.Name, m.S3.Object.Key)
+			c.debug("NOT DELETING sqs://%s [s3://%s/%s]", m.MessageID, m.S3Bucket, m.S3ObjectKey[0])
 		} else {
-			if err = c.deleteSQS(&m.ReceiptHandle); err != nil {
+			if err = c.deleteSQS(m); err != nil {
 				kerblowie("Error deleting from SQS queue: %s", err.Error())
 				continue
 			}
-			c.debug("Deleted sqs://%s [s3://%s/%s]", m.MessageID, m.S3.Bucket.Name, m.S3.Object.Key)
+			c.debug("Deleted sqs://%s [s3://%s/%s]", m.MessageID, m.S3Bucket, m.S3ObjectKey[0])
 		}
 		log.Printf("Loaded CloudTrail file with %d records.", len(*records))
 	}
 }
 
 // dequeue fetches an item from SQS
-func (c *config) dequeue() (*cloudtrailNotificationRecord, error) {
+func (c *config) dequeue() (*cloudtrailNotification, error) {
 	numRequested := 1
 	q := sqs.New(&c.awsConfig)
 
@@ -345,28 +314,28 @@ func (c *config) dequeue() (*cloudtrailNotificationRecord, error) {
 	}
 
 	n := cloudtrailNotification{}
+	n.MessageID = not.MessageID
+	n.ReceiptHandle = *m.ReceiptHandle
 	if not.Message == "CloudTrail validation message." { // swallow validation messages
-		if err = c.deleteSQS(m.ReceiptHandle); err != nil {
+		if err = c.deleteSQS(&n); err != nil {
 			return nil, fmt.Errorf("Error deleting CloudTrail validation message [id: %s]: %s", not.MessageID, err.Error())
 		}
 		return nil, fmt.Errorf("Deleted CloudTrail validation message id %s", not.MessageID)
 	} else if err := json.Unmarshal([]byte(not.Message), &n); err != nil {
-		kerblowie(fmt.Sprintf("CloudTrail JSON error [id: %s]: %s", not.MessageID, err.Error()))
-
-		//		return nil, fmt.Errorf("CloudTrail JSON error [id: %s]: %s", not.MessageID, err.Error())
+		return nil, fmt.Errorf("CloudTrail JSON error [id: %s]: %s", not.MessageID, err.Error())
 	}
-	record := n.Records[0]
-	record.MessageID = not.MessageID
-	record.ReceiptHandle = *m.ReceiptHandle
-	return &record, nil
+	return &n, nil
 }
 
 // download fetches the CloudTrail logfile from S3 and parses it
-func (c *config) download(m *cloudtrailNotificationRecord) (*[]cloudtrailRecord, error) {
+func (c *config) download(m *cloudtrailNotification) (*[]cloudtrailRecord, error) {
+	if len(m.S3ObjectKey) != 1 {
+		return nil, fmt.Errorf("Expected one S3 key but got %d", len(m.S3ObjectKey[0]))
+	}
 	s := s3.New(&c.awsConfig)
 	q := s3.GetObjectInput{
-		Bucket: aws.String(m.S3.Bucket.Name),
-		Key:    aws.String(m.S3.Object.Key),
+		Bucket: aws.String(m.S3Bucket),
+		Key:    aws.String(m.S3ObjectKey[0]),
 	}
 	o, err := s.GetObject(&q)
 	if err != nil {
@@ -415,11 +384,11 @@ func (c *config) load(records *[]cloudtrailRecord) error {
 }
 
 // deleteSQS removes a completed notification from the queue
-func (c *config) deleteSQS(receiptHandle *string) error {
+func (c *config) deleteSQS(m *cloudtrailNotification) error {
 	q := sqs.New(&c.awsConfig)
 	req := sqs.DeleteMessageInput{
 		QueueURL:      aws.String(c.queueURL),
-		ReceiptHandle: aws.String(*receiptHandle),
+		ReceiptHandle: aws.String(m.ReceiptHandle),
 	}
 	_, err := q.DeleteMessage(&req)
 	if err != nil {
