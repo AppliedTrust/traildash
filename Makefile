@@ -2,8 +2,7 @@ TAG:=`git describe --abbrev=0 --tags`
 KIBANA_VERSION=3.1.2
 
 deps:
-	go get github.com/awslabs/aws-sdk-go/service/s3
-	go get github.com/awslabs/aws-sdk-go/service/sqs
+	go get github.com/aws/aws-sdk-go
 	glock sync github.com/appliedtrust/traildash
 
 dist-clean:

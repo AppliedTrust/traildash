@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/awslabs/aws-sdk-go/aws"
-	"github.com/awslabs/aws-sdk-go/service/s3"
-	"github.com/awslabs/aws-sdk-go/service/sqs"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/aws/aws-sdk-go/service/sqs"
 	"io"
 	"io/ioutil"
 	"log"
@@ -20,7 +20,7 @@ import (
 	"time"
 )
 
-const version = "0.0.9"
+const version = "0.0.10"
 
 const usage = `traildash: easy AWS CloudTrail dashboard
 
@@ -254,7 +254,10 @@ func (c *config) workLogs() {
 			log.Printf("Empty queue... polling for 20 seconds.")
 			continue
 		}
-		c.debug("Fetched sqs://%s [s3://%s/%s]", m.MessageID, m.S3Bucket, m.S3ObjectKey[0])
+		if len(m.S3ObjectKey) < 1 {
+			kerblowie("Error dequeing from SQS: S3ObjectKey empty.  Please grab the contents of SQS message ID sqs://%s and report in a GitHub issue.  Thanks!!", m.MessageID)
+			continue
+		}
 
 		// download from S3
 		records, err := c.download(m)
@@ -292,8 +295,8 @@ func (c *config) dequeue() (*cloudtrailNotification, error) {
 
 	req := sqs.ReceiveMessageInput{
 		QueueURL:            aws.String(c.queueURL),
-		MaxNumberOfMessages: aws.Long(int64(numRequested)),
-		WaitTimeSeconds:     aws.Long(20), // max allowed
+		MaxNumberOfMessages: aws.Int64(int64(numRequested)),
+		WaitTimeSeconds:     aws.Int64(20), // max allowed
 	}
 	resp, err := q.ReceiveMessage(&req)
 	if err != nil {
@@ -423,12 +426,11 @@ func parseArgs() (*config, error) {
 	}
 	c.awsKeyId = os.Getenv("AWS_ACCESS_KEY_ID")
 	c.awsSecret = os.Getenv("AWS_SECRET_ACCESS_KEY")
-	creds := aws.DetectCreds(c.awsKeyId, c.awsSecret, "")
-	c.awsConfig = aws.Config{Credentials: creds, Region: c.region}
 	c.region = os.Getenv("AWS_REGION")
 	if len(c.region) < 1 {
 		c.region = "us-east-1"
 	}
+	c.awsConfig = aws.Config{Region: aws.String(c.region)}
 	c.esURL = os.Getenv("ES_URL")
 	if len(c.esURL) < 1 {
 		c.esURL = "http://127.0.0.1:9200"
