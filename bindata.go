@@ -5,12 +5,12 @@ import (
 	"compress/gzip"
 	"fmt"
 	"io"
-	"strings"
-	"os"
-	"time"
 	"io/ioutil"
+	"os"
 	"path"
 	"path/filepath"
+	"strings"
+	"time"
 )
 
 func bindata_read(data []byte, name string) ([]byte, error) {
@@ -36,9 +36,9 @@ type asset struct {
 }
 
 type bindata_file_info struct {
-	name string
-	size int64
-	mode os.FileMode
+	name    string
+	size    int64
+	mode    os.FileMode
 	modTime time.Time
 }
 
@@ -77,7 +77,7 @@ func kibana_license_md() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/LICENSE.md", size: 562, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -97,7 +97,7 @@ func kibana_readme_md() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/README.md", size: 3470, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -117,7 +117,7 @@ func kibana_app_app_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/app.js", size: 657653, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -137,7 +137,7 @@ func kibana_app_components_require_config_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/components/require.config.js", size: 2645, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -157,7 +157,7 @@ func kibana_app_dashboards_blank_json() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/dashboards/blank.json", size: 496, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -177,7 +177,7 @@ func kibana_app_dashboards_default_json() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/dashboards/default.json", size: 8681, mode: os.FileMode(436), modTime: time.Unix(1424968096, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -197,7 +197,7 @@ func kibana_app_dashboards_guided_json() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/dashboards/guided.json", size: 6725, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -217,7 +217,7 @@ func kibana_app_dashboards_logstash_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/dashboards/logstash.js", size: 3692, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -237,7 +237,7 @@ func kibana_app_dashboards_logstash_json() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/dashboards/logstash.json", size: 4674, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -257,7 +257,7 @@ func kibana_app_dashboards_noted_json() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/dashboards/noted.json", size: 4101, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -277,7 +277,7 @@ func kibana_app_factories_store_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/factories/store.js", size: 852, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -297,7 +297,7 @@ func kibana_app_panels_bettermap_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/editor.html", size: 511, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -317,7 +317,7 @@ func kibana_app_panels_bettermap_leaflet_images_layers_2x_png() (*asset, error) 
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/leaflet/images/layers-2x.png", size: 2898, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -337,7 +337,7 @@ func kibana_app_panels_bettermap_leaflet_images_layers_png() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/leaflet/images/layers.png", size: 1502, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -357,7 +357,7 @@ func kibana_app_panels_bettermap_leaflet_images_marker_icon_2x_png() (*asset, er
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/leaflet/images/marker-icon-2x.png", size: 4033, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -377,7 +377,7 @@ func kibana_app_panels_bettermap_leaflet_images_marker_icon_png() (*asset, error
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/leaflet/images/marker-icon.png", size: 1747, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -397,7 +397,7 @@ func kibana_app_panels_bettermap_leaflet_images_marker_shadow_png() (*asset, err
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/leaflet/images/marker-shadow.png", size: 797, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -417,7 +417,7 @@ func kibana_app_panels_bettermap_leaflet_leaflet_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/leaflet/leaflet.css", size: 7825, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -437,7 +437,7 @@ func kibana_app_panels_bettermap_leaflet_leaflet_ie_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/leaflet/leaflet.ie.css", size: 922, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -457,7 +457,7 @@ func kibana_app_panels_bettermap_leaflet_leaflet_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/leaflet/leaflet.js", size: 117359, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -477,7 +477,7 @@ func kibana_app_panels_bettermap_leaflet_plugins_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/leaflet/plugins.css", size: 1496, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -497,7 +497,7 @@ func kibana_app_panels_bettermap_leaflet_plugins_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/leaflet/plugins.js", size: 32000, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -517,7 +517,7 @@ func kibana_app_panels_bettermap_module_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/module.css", size: 32, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -537,7 +537,7 @@ func kibana_app_panels_bettermap_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/module.html", size: 294, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -557,7 +557,7 @@ func kibana_app_panels_bettermap_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/bettermap/module.js", size: 130947, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -577,7 +577,7 @@ func kibana_app_panels_column_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/column/editor.html", size: 1354, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -597,7 +597,7 @@ func kibana_app_panels_column_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/column/module.html", size: 313, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -617,7 +617,7 @@ func kibana_app_panels_column_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/column/module.js", size: 1387, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -637,7 +637,7 @@ func kibana_app_panels_column_panelgeneral_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/column/panelgeneral.html", size: 412, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -657,7 +657,7 @@ func kibana_app_panels_dashcontrol_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/dashcontrol/editor.html", size: 2007, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -677,7 +677,7 @@ func kibana_app_panels_dashcontrol_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/dashcontrol/module.html", size: 177, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -697,7 +697,7 @@ func kibana_app_panels_dashcontrol_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/dashcontrol/module.js", size: 3620, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -717,7 +717,7 @@ func kibana_app_panels_derivequeries_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/derivequeries/editor.html", size: 11, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -737,7 +737,7 @@ func kibana_app_panels_derivequeries_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/derivequeries/module.html", size: 247, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -757,7 +757,7 @@ func kibana_app_panels_derivequeries_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/derivequeries/module.js", size: 625, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -777,7 +777,7 @@ func kibana_app_panels_fields_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/fields/editor.html", size: 667, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -797,7 +797,7 @@ func kibana_app_panels_fields_micropanel_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/fields/micropanel.html", size: 1060, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -817,7 +817,7 @@ func kibana_app_panels_fields_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/fields/module.html", size: 141, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -837,7 +837,7 @@ func kibana_app_panels_fields_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/fields/module.js", size: 568, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -857,7 +857,7 @@ func kibana_app_panels_filtering_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/filtering/editor.html", size: 81, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -877,7 +877,7 @@ func kibana_app_panels_filtering_meta_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/filtering/meta.html", size: 556, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -897,7 +897,7 @@ func kibana_app_panels_filtering_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/filtering/module.html", size: 3489, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -917,7 +917,7 @@ func kibana_app_panels_filtering_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/filtering/module.js", size: 1337, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -937,7 +937,7 @@ func kibana_app_panels_goal_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/goal/editor.html", size: 919, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -957,7 +957,7 @@ func kibana_app_panels_goal_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/goal/module.html", size: 752, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -977,7 +977,7 @@ func kibana_app_panels_goal_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/goal/module.js", size: 2741, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -997,7 +997,7 @@ func kibana_app_panels_histogram_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/histogram/editor.html", size: 2586, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1017,7 +1017,7 @@ func kibana_app_panels_histogram_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/histogram/module.html", size: 3483, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1037,7 +1037,7 @@ func kibana_app_panels_histogram_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/histogram/module.js", size: 35138, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1057,7 +1057,7 @@ func kibana_app_panels_histogram_querieseditor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/histogram/queriesEditor.html", size: 1978, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1077,7 +1077,7 @@ func kibana_app_panels_histogram_styleeditor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/histogram/styleEditor.html", size: 4050, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1097,7 +1097,7 @@ func kibana_app_panels_hits_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/hits/editor.html", size: 1585, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1117,7 +1117,7 @@ func kibana_app_panels_hits_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/hits/module.html", size: 2051, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1137,7 +1137,7 @@ func kibana_app_panels_hits_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/hits/module.js", size: 3351, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1157,7 +1157,7 @@ func kibana_app_panels_map_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/map/editor.html", size: 603, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1177,7 +1177,7 @@ func kibana_app_panels_map_lib_map_europe_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/map/lib/map.europe.js", size: 141805, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1197,7 +1197,7 @@ func kibana_app_panels_map_lib_map_usa_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/map/lib/map.usa.js", size: 111308, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1217,7 +1217,7 @@ func kibana_app_panels_map_lib_map_world_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/map/lib/map.world.js", size: 142402, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1237,7 +1237,7 @@ func kibana_app_panels_map_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/map/module.html", size: 1439, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1257,7 +1257,7 @@ func kibana_app_panels_map_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/map/module.js", size: 35947, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1277,7 +1277,7 @@ func kibana_app_panels_query_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/query/editor.html", size: 81, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1297,7 +1297,7 @@ func kibana_app_panels_query_editors_lucene_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/query/editors/lucene.html", size: 0, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1317,7 +1317,7 @@ func kibana_app_panels_query_editors_regex_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/query/editors/regex.html", size: 0, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1337,7 +1337,7 @@ func kibana_app_panels_query_editors_topn_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/query/editors/topN.html", size: 514, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1357,7 +1357,7 @@ func kibana_app_panels_query_help_lucene_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/query/help/lucene.html", size: 1713, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1377,7 +1377,7 @@ func kibana_app_panels_query_help_regex_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/query/help/regex.html", size: 547, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1397,7 +1397,7 @@ func kibana_app_panels_query_help_topn_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/query/help/topN.html", size: 1243, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1417,7 +1417,7 @@ func kibana_app_panels_query_helpmodal_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/query/helpModal.html", size: 348, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1437,7 +1437,7 @@ func kibana_app_panels_query_meta_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/query/meta.html", size: 1613, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1457,7 +1457,7 @@ func kibana_app_panels_query_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/query/module.html", size: 2961, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1477,7 +1477,7 @@ func kibana_app_panels_query_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/query/module.js", size: 2638, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1497,7 +1497,7 @@ func kibana_app_panels_query_query_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/query/query.css", size: 604, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1517,7 +1517,7 @@ func kibana_app_panels_sparklines_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/sparklines/editor.html", size: 1113, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1537,7 +1537,7 @@ func kibana_app_panels_sparklines_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/sparklines/module.html", size: 510, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1557,7 +1557,7 @@ func kibana_app_panels_sparklines_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/sparklines/module.js", size: 11151, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1577,7 +1577,7 @@ func kibana_app_panels_stats_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/stats/editor.html", size: 1685, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1597,7 +1597,7 @@ func kibana_app_panels_stats_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/stats/module.html", size: 1511, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1617,7 +1617,7 @@ func kibana_app_panels_stats_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/stats/module.js", size: 8482, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1637,7 +1637,7 @@ func kibana_app_panels_table_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/table/editor.html", size: 2794, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1657,7 +1657,7 @@ func kibana_app_panels_table_micropanel_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/table/micropanel.html", size: 3249, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1677,7 +1677,7 @@ func kibana_app_panels_table_modal_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/table/modal.html", size: 1048, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1697,7 +1697,7 @@ func kibana_app_panels_table_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/table/module.html", size: 8692, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1717,7 +1717,7 @@ func kibana_app_panels_table_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/table/module.js", size: 9051, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1737,7 +1737,7 @@ func kibana_app_panels_table_pagination_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/table/pagination.html", size: 929, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1757,7 +1757,7 @@ func kibana_app_panels_terms_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/terms/editor.html", size: 3729, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1777,7 +1777,7 @@ func kibana_app_panels_terms_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/terms/module.html", size: 2967, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1797,7 +1797,7 @@ func kibana_app_panels_terms_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/terms/module.js", size: 4698, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1817,7 +1817,7 @@ func kibana_app_panels_text_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/text/editor.html", size: 973, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1837,7 +1837,7 @@ func kibana_app_panels_text_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/text/module.html", size: 311, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1857,7 +1857,7 @@ func kibana_app_panels_text_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/text/module.js", size: 10082, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1877,7 +1877,7 @@ func kibana_app_panels_timepicker_custom_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/timepicker/custom.html", size: 3576, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1897,7 +1897,7 @@ func kibana_app_panels_timepicker_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/timepicker/editor.html", size: 593, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1917,7 +1917,7 @@ func kibana_app_panels_timepicker_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/timepicker/module.html", size: 1758, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1937,7 +1937,7 @@ func kibana_app_panels_timepicker_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/timepicker/module.js", size: 2911, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1957,7 +1957,7 @@ func kibana_app_panels_timepicker_refreshctrl_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/timepicker/refreshctrl.html", size: 325, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1977,7 +1977,7 @@ func kibana_app_panels_trends_editor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/trends/editor.html", size: 968, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -1997,7 +1997,7 @@ func kibana_app_panels_trends_module_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/trends/module.html", size: 1093, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2017,7 +2017,7 @@ func kibana_app_panels_trends_module_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/panels/trends/module.js", size: 3296, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2037,7 +2037,7 @@ func kibana_app_partials_connectionfailed_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/connectionFailed.html", size: 1248, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2057,7 +2057,7 @@ func kibana_app_partials_dashloader_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/dashLoader.html", size: 4908, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2077,7 +2077,7 @@ func kibana_app_partials_dashloadershare_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/dashLoaderShare.html", size: 567, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2097,7 +2097,7 @@ func kibana_app_partials_dashboard_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/dashboard.html", size: 4096, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2117,7 +2117,7 @@ func kibana_app_partials_dasheditor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/dasheditor.html", size: 8663, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2137,7 +2137,7 @@ func kibana_app_partials_inspector_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/inspector.html", size: 425, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2157,7 +2157,7 @@ func kibana_app_partials_load_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/load.html", size: 127, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2177,7 +2177,7 @@ func kibana_app_partials_modal_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/modal.html", size: 322, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2197,7 +2197,7 @@ func kibana_app_partials_paneladd_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/paneladd.html", size: 208, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2217,7 +2217,7 @@ func kibana_app_partials_paneleditor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/paneleditor.html", size: 864, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2237,7 +2237,7 @@ func kibana_app_partials_panelgeneral_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/panelgeneral.html", size: 979, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2257,7 +2257,7 @@ func kibana_app_partials_queryselect_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/querySelect.html", size: 1065, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2277,7 +2277,7 @@ func kibana_app_partials_roweditor_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/app/partials/roweditor.html", size: 2910, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2297,7 +2297,7 @@ func kibana_build_txt() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/build.txt", size: 3626, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2317,7 +2317,7 @@ func kibana_config_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/config.js", size: 2379, mode: os.FileMode(436), modTime: time.Unix(1424968096, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2337,7 +2337,7 @@ func kibana_css_animate_min_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/css/animate.min.css", size: 48174, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2357,7 +2357,7 @@ func kibana_css_bootstrap_responsive_min_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/css/bootstrap-responsive.min.css", size: 16451, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2377,7 +2377,7 @@ func kibana_css_bootstrap_dark_less() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/css/bootstrap.dark.less", size: 145972, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2397,7 +2397,7 @@ func kibana_css_bootstrap_dark_min_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/css/bootstrap.dark.min.css", size: 121000, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2417,7 +2417,7 @@ func kibana_css_bootstrap_light_less() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/css/bootstrap.light.less", size: 145475, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2437,7 +2437,7 @@ func kibana_css_bootstrap_light_min_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/css/bootstrap.light.min.css", size: 120584, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2457,7 +2457,7 @@ func kibana_css_font_awesome_min_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/css/font-awesome.min.css", size: 21141, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2477,7 +2477,7 @@ func kibana_css_normalize_min_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/css/normalize.min.css", size: 2376, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2497,7 +2497,7 @@ func kibana_css_timepicker_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/css/timepicker.css", size: 11636, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2517,7 +2517,7 @@ func kibana_favicon_ico() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/favicon.ico", size: 1150, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2537,7 +2537,7 @@ func kibana_font_fontawesome_otf() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/font/FontAwesome.otf", size: 61896, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2557,7 +2557,7 @@ func kibana_font_fontawesome_webfont_eot() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/font/fontawesome-webfont.eot", size: 37405, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2577,7 +2577,7 @@ func kibana_font_fontawesome_webfont_svg() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/font/fontawesome-webfont.svg", size: 197829, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2597,7 +2597,7 @@ func kibana_font_fontawesome_webfont_ttf() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/font/fontawesome-webfont.ttf", size: 79076, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2617,7 +2617,7 @@ func kibana_font_fontawesome_webfont_woff() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/font/fontawesome-webfont.woff", size: 43572, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2637,7 +2637,7 @@ func kibana_img_annotation_icon_png() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/img/annotation-icon.png", size: 4687, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2657,7 +2657,7 @@ func kibana_img_cubes_png() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/img/cubes.png", size: 22505, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2677,7 +2677,7 @@ func kibana_img_glyphicons_halflings_white_png() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/img/glyphicons-halflings-white.png", size: 8777, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2697,7 +2697,7 @@ func kibana_img_glyphicons_halflings_png() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/img/glyphicons-halflings.png", size: 12799, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2717,7 +2717,7 @@ func kibana_img_kibana_png() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/img/kibana.png", size: 7359, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2737,7 +2737,7 @@ func kibana_img_light_png() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/img/light.png", size: 14080, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2757,7 +2757,7 @@ func kibana_img_load_gif() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/img/load.gif", size: 723, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2777,7 +2777,7 @@ func kibana_img_load_big_gif() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/img/load_big.gif", size: 2892, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2797,7 +2797,7 @@ func kibana_img_small_png() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/img/small.png", size: 480, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2817,7 +2817,7 @@ func kibana_index_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/index.html", size: 2073, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2837,7 +2837,7 @@ func kibana_vendor_license_json() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/LICENSE.json", size: 1614, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2857,7 +2857,7 @@ func kibana_vendor_bootstrap_less_tests_buttons_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/bootstrap/less/tests/buttons.html", size: 6411, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2877,7 +2877,7 @@ func kibana_vendor_bootstrap_less_tests_css_tests_css() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/bootstrap/less/tests/css-tests.css", size: 4597, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2897,7 +2897,7 @@ func kibana_vendor_bootstrap_less_tests_css_tests_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/bootstrap/less/tests/css-tests.html", size: 40132, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2917,7 +2917,7 @@ func kibana_vendor_bootstrap_less_tests_forms_responsive_html() (*asset, error) 
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/bootstrap/less/tests/forms-responsive.html", size: 2362, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2937,7 +2937,7 @@ func kibana_vendor_bootstrap_less_tests_forms_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/bootstrap/less/tests/forms.html", size: 4079, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2957,7 +2957,7 @@ func kibana_vendor_bootstrap_less_tests_navbar_fixed_top_html() (*asset, error) 
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/bootstrap/less/tests/navbar-fixed-top.html", size: 4692, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2977,7 +2977,7 @@ func kibana_vendor_bootstrap_less_tests_navbar_static_top_html() (*asset, error)
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/bootstrap/less/tests/navbar-static-top.html", size: 4711, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -2997,7 +2997,7 @@ func kibana_vendor_bootstrap_less_tests_navbar_html() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/bootstrap/less/tests/navbar.html", size: 4797, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -3017,7 +3017,7 @@ func kibana_vendor_require_css_build_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/require/css-build.js", size: 1031, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -3037,7 +3037,7 @@ func kibana_vendor_require_require_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/require/require.js", size: 16687, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -3057,7 +3057,7 @@ func kibana_vendor_require_tmpl_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/require/tmpl.js", size: 283, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -3077,7 +3077,7 @@ func kibana_vendor_timezone_js() (*asset, error) {
 	}
 
 	info := bindata_file_info{name: "kibana/vendor/timezone.js", size: 18843, mode: os.FileMode(436), modTime: time.Unix(1415373325, 0)}
-	a := &asset{bytes: bytes, info:  info}
+	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
 
@@ -3122,157 +3122,157 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"kibana/LICENSE.md": kibana_license_md,
-	"kibana/README.md": kibana_readme_md,
-	"kibana/app/app.js": kibana_app_app_js,
-	"kibana/app/components/require.config.js": kibana_app_components_require_config_js,
-	"kibana/app/dashboards/blank.json": kibana_app_dashboards_blank_json,
-	"kibana/app/dashboards/default.json": kibana_app_dashboards_default_json,
-	"kibana/app/dashboards/guided.json": kibana_app_dashboards_guided_json,
-	"kibana/app/dashboards/logstash.js": kibana_app_dashboards_logstash_js,
-	"kibana/app/dashboards/logstash.json": kibana_app_dashboards_logstash_json,
-	"kibana/app/dashboards/noted.json": kibana_app_dashboards_noted_json,
-	"kibana/app/factories/store.js": kibana_app_factories_store_js,
-	"kibana/app/panels/bettermap/editor.html": kibana_app_panels_bettermap_editor_html,
-	"kibana/app/panels/bettermap/leaflet/images/layers-2x.png": kibana_app_panels_bettermap_leaflet_images_layers_2x_png,
-	"kibana/app/panels/bettermap/leaflet/images/layers.png": kibana_app_panels_bettermap_leaflet_images_layers_png,
+	"kibana/LICENSE.md":                                             kibana_license_md,
+	"kibana/README.md":                                              kibana_readme_md,
+	"kibana/app/app.js":                                             kibana_app_app_js,
+	"kibana/app/components/require.config.js":                       kibana_app_components_require_config_js,
+	"kibana/app/dashboards/blank.json":                              kibana_app_dashboards_blank_json,
+	"kibana/app/dashboards/default.json":                            kibana_app_dashboards_default_json,
+	"kibana/app/dashboards/guided.json":                             kibana_app_dashboards_guided_json,
+	"kibana/app/dashboards/logstash.js":                             kibana_app_dashboards_logstash_js,
+	"kibana/app/dashboards/logstash.json":                           kibana_app_dashboards_logstash_json,
+	"kibana/app/dashboards/noted.json":                              kibana_app_dashboards_noted_json,
+	"kibana/app/factories/store.js":                                 kibana_app_factories_store_js,
+	"kibana/app/panels/bettermap/editor.html":                       kibana_app_panels_bettermap_editor_html,
+	"kibana/app/panels/bettermap/leaflet/images/layers-2x.png":      kibana_app_panels_bettermap_leaflet_images_layers_2x_png,
+	"kibana/app/panels/bettermap/leaflet/images/layers.png":         kibana_app_panels_bettermap_leaflet_images_layers_png,
 	"kibana/app/panels/bettermap/leaflet/images/marker-icon-2x.png": kibana_app_panels_bettermap_leaflet_images_marker_icon_2x_png,
-	"kibana/app/panels/bettermap/leaflet/images/marker-icon.png": kibana_app_panels_bettermap_leaflet_images_marker_icon_png,
-	"kibana/app/panels/bettermap/leaflet/images/marker-shadow.png": kibana_app_panels_bettermap_leaflet_images_marker_shadow_png,
-	"kibana/app/panels/bettermap/leaflet/leaflet.css": kibana_app_panels_bettermap_leaflet_leaflet_css,
-	"kibana/app/panels/bettermap/leaflet/leaflet.ie.css": kibana_app_panels_bettermap_leaflet_leaflet_ie_css,
-	"kibana/app/panels/bettermap/leaflet/leaflet.js": kibana_app_panels_bettermap_leaflet_leaflet_js,
-	"kibana/app/panels/bettermap/leaflet/plugins.css": kibana_app_panels_bettermap_leaflet_plugins_css,
-	"kibana/app/panels/bettermap/leaflet/plugins.js": kibana_app_panels_bettermap_leaflet_plugins_js,
-	"kibana/app/panels/bettermap/module.css": kibana_app_panels_bettermap_module_css,
-	"kibana/app/panels/bettermap/module.html": kibana_app_panels_bettermap_module_html,
-	"kibana/app/panels/bettermap/module.js": kibana_app_panels_bettermap_module_js,
-	"kibana/app/panels/column/editor.html": kibana_app_panels_column_editor_html,
-	"kibana/app/panels/column/module.html": kibana_app_panels_column_module_html,
-	"kibana/app/panels/column/module.js": kibana_app_panels_column_module_js,
-	"kibana/app/panels/column/panelgeneral.html": kibana_app_panels_column_panelgeneral_html,
-	"kibana/app/panels/dashcontrol/editor.html": kibana_app_panels_dashcontrol_editor_html,
-	"kibana/app/panels/dashcontrol/module.html": kibana_app_panels_dashcontrol_module_html,
-	"kibana/app/panels/dashcontrol/module.js": kibana_app_panels_dashcontrol_module_js,
-	"kibana/app/panels/derivequeries/editor.html": kibana_app_panels_derivequeries_editor_html,
-	"kibana/app/panels/derivequeries/module.html": kibana_app_panels_derivequeries_module_html,
-	"kibana/app/panels/derivequeries/module.js": kibana_app_panels_derivequeries_module_js,
-	"kibana/app/panels/fields/editor.html": kibana_app_panels_fields_editor_html,
-	"kibana/app/panels/fields/micropanel.html": kibana_app_panels_fields_micropanel_html,
-	"kibana/app/panels/fields/module.html": kibana_app_panels_fields_module_html,
-	"kibana/app/panels/fields/module.js": kibana_app_panels_fields_module_js,
-	"kibana/app/panels/filtering/editor.html": kibana_app_panels_filtering_editor_html,
-	"kibana/app/panels/filtering/meta.html": kibana_app_panels_filtering_meta_html,
-	"kibana/app/panels/filtering/module.html": kibana_app_panels_filtering_module_html,
-	"kibana/app/panels/filtering/module.js": kibana_app_panels_filtering_module_js,
-	"kibana/app/panels/goal/editor.html": kibana_app_panels_goal_editor_html,
-	"kibana/app/panels/goal/module.html": kibana_app_panels_goal_module_html,
-	"kibana/app/panels/goal/module.js": kibana_app_panels_goal_module_js,
-	"kibana/app/panels/histogram/editor.html": kibana_app_panels_histogram_editor_html,
-	"kibana/app/panels/histogram/module.html": kibana_app_panels_histogram_module_html,
-	"kibana/app/panels/histogram/module.js": kibana_app_panels_histogram_module_js,
-	"kibana/app/panels/histogram/queriesEditor.html": kibana_app_panels_histogram_querieseditor_html,
-	"kibana/app/panels/histogram/styleEditor.html": kibana_app_panels_histogram_styleeditor_html,
-	"kibana/app/panels/hits/editor.html": kibana_app_panels_hits_editor_html,
-	"kibana/app/panels/hits/module.html": kibana_app_panels_hits_module_html,
-	"kibana/app/panels/hits/module.js": kibana_app_panels_hits_module_js,
-	"kibana/app/panels/map/editor.html": kibana_app_panels_map_editor_html,
-	"kibana/app/panels/map/lib/map.europe.js": kibana_app_panels_map_lib_map_europe_js,
-	"kibana/app/panels/map/lib/map.usa.js": kibana_app_panels_map_lib_map_usa_js,
-	"kibana/app/panels/map/lib/map.world.js": kibana_app_panels_map_lib_map_world_js,
-	"kibana/app/panels/map/module.html": kibana_app_panels_map_module_html,
-	"kibana/app/panels/map/module.js": kibana_app_panels_map_module_js,
-	"kibana/app/panels/query/editor.html": kibana_app_panels_query_editor_html,
-	"kibana/app/panels/query/editors/lucene.html": kibana_app_panels_query_editors_lucene_html,
-	"kibana/app/panels/query/editors/regex.html": kibana_app_panels_query_editors_regex_html,
-	"kibana/app/panels/query/editors/topN.html": kibana_app_panels_query_editors_topn_html,
-	"kibana/app/panels/query/help/lucene.html": kibana_app_panels_query_help_lucene_html,
-	"kibana/app/panels/query/help/regex.html": kibana_app_panels_query_help_regex_html,
-	"kibana/app/panels/query/help/topN.html": kibana_app_panels_query_help_topn_html,
-	"kibana/app/panels/query/helpModal.html": kibana_app_panels_query_helpmodal_html,
-	"kibana/app/panels/query/meta.html": kibana_app_panels_query_meta_html,
-	"kibana/app/panels/query/module.html": kibana_app_panels_query_module_html,
-	"kibana/app/panels/query/module.js": kibana_app_panels_query_module_js,
-	"kibana/app/panels/query/query.css": kibana_app_panels_query_query_css,
-	"kibana/app/panels/sparklines/editor.html": kibana_app_panels_sparklines_editor_html,
-	"kibana/app/panels/sparklines/module.html": kibana_app_panels_sparklines_module_html,
-	"kibana/app/panels/sparklines/module.js": kibana_app_panels_sparklines_module_js,
-	"kibana/app/panels/stats/editor.html": kibana_app_panels_stats_editor_html,
-	"kibana/app/panels/stats/module.html": kibana_app_panels_stats_module_html,
-	"kibana/app/panels/stats/module.js": kibana_app_panels_stats_module_js,
-	"kibana/app/panels/table/editor.html": kibana_app_panels_table_editor_html,
-	"kibana/app/panels/table/micropanel.html": kibana_app_panels_table_micropanel_html,
-	"kibana/app/panels/table/modal.html": kibana_app_panels_table_modal_html,
-	"kibana/app/panels/table/module.html": kibana_app_panels_table_module_html,
-	"kibana/app/panels/table/module.js": kibana_app_panels_table_module_js,
-	"kibana/app/panels/table/pagination.html": kibana_app_panels_table_pagination_html,
-	"kibana/app/panels/terms/editor.html": kibana_app_panels_terms_editor_html,
-	"kibana/app/panels/terms/module.html": kibana_app_panels_terms_module_html,
-	"kibana/app/panels/terms/module.js": kibana_app_panels_terms_module_js,
-	"kibana/app/panels/text/editor.html": kibana_app_panels_text_editor_html,
-	"kibana/app/panels/text/module.html": kibana_app_panels_text_module_html,
-	"kibana/app/panels/text/module.js": kibana_app_panels_text_module_js,
-	"kibana/app/panels/timepicker/custom.html": kibana_app_panels_timepicker_custom_html,
-	"kibana/app/panels/timepicker/editor.html": kibana_app_panels_timepicker_editor_html,
-	"kibana/app/panels/timepicker/module.html": kibana_app_panels_timepicker_module_html,
-	"kibana/app/panels/timepicker/module.js": kibana_app_panels_timepicker_module_js,
-	"kibana/app/panels/timepicker/refreshctrl.html": kibana_app_panels_timepicker_refreshctrl_html,
-	"kibana/app/panels/trends/editor.html": kibana_app_panels_trends_editor_html,
-	"kibana/app/panels/trends/module.html": kibana_app_panels_trends_module_html,
-	"kibana/app/panels/trends/module.js": kibana_app_panels_trends_module_js,
-	"kibana/app/partials/connectionFailed.html": kibana_app_partials_connectionfailed_html,
-	"kibana/app/partials/dashLoader.html": kibana_app_partials_dashloader_html,
-	"kibana/app/partials/dashLoaderShare.html": kibana_app_partials_dashloadershare_html,
-	"kibana/app/partials/dashboard.html": kibana_app_partials_dashboard_html,
-	"kibana/app/partials/dasheditor.html": kibana_app_partials_dasheditor_html,
-	"kibana/app/partials/inspector.html": kibana_app_partials_inspector_html,
-	"kibana/app/partials/load.html": kibana_app_partials_load_html,
-	"kibana/app/partials/modal.html": kibana_app_partials_modal_html,
-	"kibana/app/partials/paneladd.html": kibana_app_partials_paneladd_html,
-	"kibana/app/partials/paneleditor.html": kibana_app_partials_paneleditor_html,
-	"kibana/app/partials/panelgeneral.html": kibana_app_partials_panelgeneral_html,
-	"kibana/app/partials/querySelect.html": kibana_app_partials_queryselect_html,
-	"kibana/app/partials/roweditor.html": kibana_app_partials_roweditor_html,
-	"kibana/build.txt": kibana_build_txt,
-	"kibana/config.js": kibana_config_js,
-	"kibana/css/animate.min.css": kibana_css_animate_min_css,
-	"kibana/css/bootstrap-responsive.min.css": kibana_css_bootstrap_responsive_min_css,
-	"kibana/css/bootstrap.dark.less": kibana_css_bootstrap_dark_less,
-	"kibana/css/bootstrap.dark.min.css": kibana_css_bootstrap_dark_min_css,
-	"kibana/css/bootstrap.light.less": kibana_css_bootstrap_light_less,
-	"kibana/css/bootstrap.light.min.css": kibana_css_bootstrap_light_min_css,
-	"kibana/css/font-awesome.min.css": kibana_css_font_awesome_min_css,
-	"kibana/css/normalize.min.css": kibana_css_normalize_min_css,
-	"kibana/css/timepicker.css": kibana_css_timepicker_css,
-	"kibana/favicon.ico": kibana_favicon_ico,
-	"kibana/font/FontAwesome.otf": kibana_font_fontawesome_otf,
-	"kibana/font/fontawesome-webfont.eot": kibana_font_fontawesome_webfont_eot,
-	"kibana/font/fontawesome-webfont.svg": kibana_font_fontawesome_webfont_svg,
-	"kibana/font/fontawesome-webfont.ttf": kibana_font_fontawesome_webfont_ttf,
-	"kibana/font/fontawesome-webfont.woff": kibana_font_fontawesome_webfont_woff,
-	"kibana/img/annotation-icon.png": kibana_img_annotation_icon_png,
-	"kibana/img/cubes.png": kibana_img_cubes_png,
-	"kibana/img/glyphicons-halflings-white.png": kibana_img_glyphicons_halflings_white_png,
-	"kibana/img/glyphicons-halflings.png": kibana_img_glyphicons_halflings_png,
-	"kibana/img/kibana.png": kibana_img_kibana_png,
-	"kibana/img/light.png": kibana_img_light_png,
-	"kibana/img/load.gif": kibana_img_load_gif,
-	"kibana/img/load_big.gif": kibana_img_load_big_gif,
-	"kibana/img/small.png": kibana_img_small_png,
-	"kibana/index.html": kibana_index_html,
-	"kibana/vendor/LICENSE.json": kibana_vendor_license_json,
-	"kibana/vendor/bootstrap/less/tests/buttons.html": kibana_vendor_bootstrap_less_tests_buttons_html,
-	"kibana/vendor/bootstrap/less/tests/css-tests.css": kibana_vendor_bootstrap_less_tests_css_tests_css,
-	"kibana/vendor/bootstrap/less/tests/css-tests.html": kibana_vendor_bootstrap_less_tests_css_tests_html,
-	"kibana/vendor/bootstrap/less/tests/forms-responsive.html": kibana_vendor_bootstrap_less_tests_forms_responsive_html,
-	"kibana/vendor/bootstrap/less/tests/forms.html": kibana_vendor_bootstrap_less_tests_forms_html,
-	"kibana/vendor/bootstrap/less/tests/navbar-fixed-top.html": kibana_vendor_bootstrap_less_tests_navbar_fixed_top_html,
-	"kibana/vendor/bootstrap/less/tests/navbar-static-top.html": kibana_vendor_bootstrap_less_tests_navbar_static_top_html,
-	"kibana/vendor/bootstrap/less/tests/navbar.html": kibana_vendor_bootstrap_less_tests_navbar_html,
-	"kibana/vendor/require/css-build.js": kibana_vendor_require_css_build_js,
-	"kibana/vendor/require/require.js": kibana_vendor_require_require_js,
-	"kibana/vendor/require/tmpl.js": kibana_vendor_require_tmpl_js,
-	"kibana/vendor/timezone.js": kibana_vendor_timezone_js,
+	"kibana/app/panels/bettermap/leaflet/images/marker-icon.png":    kibana_app_panels_bettermap_leaflet_images_marker_icon_png,
+	"kibana/app/panels/bettermap/leaflet/images/marker-shadow.png":  kibana_app_panels_bettermap_leaflet_images_marker_shadow_png,
+	"kibana/app/panels/bettermap/leaflet/leaflet.css":               kibana_app_panels_bettermap_leaflet_leaflet_css,
+	"kibana/app/panels/bettermap/leaflet/leaflet.ie.css":            kibana_app_panels_bettermap_leaflet_leaflet_ie_css,
+	"kibana/app/panels/bettermap/leaflet/leaflet.js":                kibana_app_panels_bettermap_leaflet_leaflet_js,
+	"kibana/app/panels/bettermap/leaflet/plugins.css":               kibana_app_panels_bettermap_leaflet_plugins_css,
+	"kibana/app/panels/bettermap/leaflet/plugins.js":                kibana_app_panels_bettermap_leaflet_plugins_js,
+	"kibana/app/panels/bettermap/module.css":                        kibana_app_panels_bettermap_module_css,
+	"kibana/app/panels/bettermap/module.html":                       kibana_app_panels_bettermap_module_html,
+	"kibana/app/panels/bettermap/module.js":                         kibana_app_panels_bettermap_module_js,
+	"kibana/app/panels/column/editor.html":                          kibana_app_panels_column_editor_html,
+	"kibana/app/panels/column/module.html":                          kibana_app_panels_column_module_html,
+	"kibana/app/panels/column/module.js":                            kibana_app_panels_column_module_js,
+	"kibana/app/panels/column/panelgeneral.html":                    kibana_app_panels_column_panelgeneral_html,
+	"kibana/app/panels/dashcontrol/editor.html":                     kibana_app_panels_dashcontrol_editor_html,
+	"kibana/app/panels/dashcontrol/module.html":                     kibana_app_panels_dashcontrol_module_html,
+	"kibana/app/panels/dashcontrol/module.js":                       kibana_app_panels_dashcontrol_module_js,
+	"kibana/app/panels/derivequeries/editor.html":                   kibana_app_panels_derivequeries_editor_html,
+	"kibana/app/panels/derivequeries/module.html":                   kibana_app_panels_derivequeries_module_html,
+	"kibana/app/panels/derivequeries/module.js":                     kibana_app_panels_derivequeries_module_js,
+	"kibana/app/panels/fields/editor.html":                          kibana_app_panels_fields_editor_html,
+	"kibana/app/panels/fields/micropanel.html":                      kibana_app_panels_fields_micropanel_html,
+	"kibana/app/panels/fields/module.html":                          kibana_app_panels_fields_module_html,
+	"kibana/app/panels/fields/module.js":                            kibana_app_panels_fields_module_js,
+	"kibana/app/panels/filtering/editor.html":                       kibana_app_panels_filtering_editor_html,
+	"kibana/app/panels/filtering/meta.html":                         kibana_app_panels_filtering_meta_html,
+	"kibana/app/panels/filtering/module.html":                       kibana_app_panels_filtering_module_html,
+	"kibana/app/panels/filtering/module.js":                         kibana_app_panels_filtering_module_js,
+	"kibana/app/panels/goal/editor.html":                            kibana_app_panels_goal_editor_html,
+	"kibana/app/panels/goal/module.html":                            kibana_app_panels_goal_module_html,
+	"kibana/app/panels/goal/module.js":                              kibana_app_panels_goal_module_js,
+	"kibana/app/panels/histogram/editor.html":                       kibana_app_panels_histogram_editor_html,
+	"kibana/app/panels/histogram/module.html":                       kibana_app_panels_histogram_module_html,
+	"kibana/app/panels/histogram/module.js":                         kibana_app_panels_histogram_module_js,
+	"kibana/app/panels/histogram/queriesEditor.html":                kibana_app_panels_histogram_querieseditor_html,
+	"kibana/app/panels/histogram/styleEditor.html":                  kibana_app_panels_histogram_styleeditor_html,
+	"kibana/app/panels/hits/editor.html":                            kibana_app_panels_hits_editor_html,
+	"kibana/app/panels/hits/module.html":                            kibana_app_panels_hits_module_html,
+	"kibana/app/panels/hits/module.js":                              kibana_app_panels_hits_module_js,
+	"kibana/app/panels/map/editor.html":                             kibana_app_panels_map_editor_html,
+	"kibana/app/panels/map/lib/map.europe.js":                       kibana_app_panels_map_lib_map_europe_js,
+	"kibana/app/panels/map/lib/map.usa.js":                          kibana_app_panels_map_lib_map_usa_js,
+	"kibana/app/panels/map/lib/map.world.js":                        kibana_app_panels_map_lib_map_world_js,
+	"kibana/app/panels/map/module.html":                             kibana_app_panels_map_module_html,
+	"kibana/app/panels/map/module.js":                               kibana_app_panels_map_module_js,
+	"kibana/app/panels/query/editor.html":                           kibana_app_panels_query_editor_html,
+	"kibana/app/panels/query/editors/lucene.html":                   kibana_app_panels_query_editors_lucene_html,
+	"kibana/app/panels/query/editors/regex.html":                    kibana_app_panels_query_editors_regex_html,
+	"kibana/app/panels/query/editors/topN.html":                     kibana_app_panels_query_editors_topn_html,
+	"kibana/app/panels/query/help/lucene.html":                      kibana_app_panels_query_help_lucene_html,
+	"kibana/app/panels/query/help/regex.html":                       kibana_app_panels_query_help_regex_html,
+	"kibana/app/panels/query/help/topN.html":                        kibana_app_panels_query_help_topn_html,
+	"kibana/app/panels/query/helpModal.html":                        kibana_app_panels_query_helpmodal_html,
+	"kibana/app/panels/query/meta.html":                             kibana_app_panels_query_meta_html,
+	"kibana/app/panels/query/module.html":                           kibana_app_panels_query_module_html,
+	"kibana/app/panels/query/module.js":                             kibana_app_panels_query_module_js,
+	"kibana/app/panels/query/query.css":                             kibana_app_panels_query_query_css,
+	"kibana/app/panels/sparklines/editor.html":                      kibana_app_panels_sparklines_editor_html,
+	"kibana/app/panels/sparklines/module.html":                      kibana_app_panels_sparklines_module_html,
+	"kibana/app/panels/sparklines/module.js":                        kibana_app_panels_sparklines_module_js,
+	"kibana/app/panels/stats/editor.html":                           kibana_app_panels_stats_editor_html,
+	"kibana/app/panels/stats/module.html":                           kibana_app_panels_stats_module_html,
+	"kibana/app/panels/stats/module.js":                             kibana_app_panels_stats_module_js,
+	"kibana/app/panels/table/editor.html":                           kibana_app_panels_table_editor_html,
+	"kibana/app/panels/table/micropanel.html":                       kibana_app_panels_table_micropanel_html,
+	"kibana/app/panels/table/modal.html":                            kibana_app_panels_table_modal_html,
+	"kibana/app/panels/table/module.html":                           kibana_app_panels_table_module_html,
+	"kibana/app/panels/table/module.js":                             kibana_app_panels_table_module_js,
+	"kibana/app/panels/table/pagination.html":                       kibana_app_panels_table_pagination_html,
+	"kibana/app/panels/terms/editor.html":                           kibana_app_panels_terms_editor_html,
+	"kibana/app/panels/terms/module.html":                           kibana_app_panels_terms_module_html,
+	"kibana/app/panels/terms/module.js":                             kibana_app_panels_terms_module_js,
+	"kibana/app/panels/text/editor.html":                            kibana_app_panels_text_editor_html,
+	"kibana/app/panels/text/module.html":                            kibana_app_panels_text_module_html,
+	"kibana/app/panels/text/module.js":                              kibana_app_panels_text_module_js,
+	"kibana/app/panels/timepicker/custom.html":                      kibana_app_panels_timepicker_custom_html,
+	"kibana/app/panels/timepicker/editor.html":                      kibana_app_panels_timepicker_editor_html,
+	"kibana/app/panels/timepicker/module.html":                      kibana_app_panels_timepicker_module_html,
+	"kibana/app/panels/timepicker/module.js":                        kibana_app_panels_timepicker_module_js,
+	"kibana/app/panels/timepicker/refreshctrl.html":                 kibana_app_panels_timepicker_refreshctrl_html,
+	"kibana/app/panels/trends/editor.html":                          kibana_app_panels_trends_editor_html,
+	"kibana/app/panels/trends/module.html":                          kibana_app_panels_trends_module_html,
+	"kibana/app/panels/trends/module.js":                            kibana_app_panels_trends_module_js,
+	"kibana/app/partials/connectionFailed.html":                     kibana_app_partials_connectionfailed_html,
+	"kibana/app/partials/dashLoader.html":                           kibana_app_partials_dashloader_html,
+	"kibana/app/partials/dashLoaderShare.html":                      kibana_app_partials_dashloadershare_html,
+	"kibana/app/partials/dashboard.html":                            kibana_app_partials_dashboard_html,
+	"kibana/app/partials/dasheditor.html":                           kibana_app_partials_dasheditor_html,
+	"kibana/app/partials/inspector.html":                            kibana_app_partials_inspector_html,
+	"kibana/app/partials/load.html":                                 kibana_app_partials_load_html,
+	"kibana/app/partials/modal.html":                                kibana_app_partials_modal_html,
+	"kibana/app/partials/paneladd.html":                             kibana_app_partials_paneladd_html,
+	"kibana/app/partials/paneleditor.html":                          kibana_app_partials_paneleditor_html,
+	"kibana/app/partials/panelgeneral.html":                         kibana_app_partials_panelgeneral_html,
+	"kibana/app/partials/querySelect.html":                          kibana_app_partials_queryselect_html,
+	"kibana/app/partials/roweditor.html":                            kibana_app_partials_roweditor_html,
+	"kibana/build.txt":                                              kibana_build_txt,
+	"kibana/config.js":                                              kibana_config_js,
+	"kibana/css/animate.min.css":                                    kibana_css_animate_min_css,
+	"kibana/css/bootstrap-responsive.min.css":                       kibana_css_bootstrap_responsive_min_css,
+	"kibana/css/bootstrap.dark.less":                                kibana_css_bootstrap_dark_less,
+	"kibana/css/bootstrap.dark.min.css":                             kibana_css_bootstrap_dark_min_css,
+	"kibana/css/bootstrap.light.less":                               kibana_css_bootstrap_light_less,
+	"kibana/css/bootstrap.light.min.css":                            kibana_css_bootstrap_light_min_css,
+	"kibana/css/font-awesome.min.css":                               kibana_css_font_awesome_min_css,
+	"kibana/css/normalize.min.css":                                  kibana_css_normalize_min_css,
+	"kibana/css/timepicker.css":                                     kibana_css_timepicker_css,
+	"kibana/favicon.ico":                                            kibana_favicon_ico,
+	"kibana/font/FontAwesome.otf":                                   kibana_font_fontawesome_otf,
+	"kibana/font/fontawesome-webfont.eot":                           kibana_font_fontawesome_webfont_eot,
+	"kibana/font/fontawesome-webfont.svg":                           kibana_font_fontawesome_webfont_svg,
+	"kibana/font/fontawesome-webfont.ttf":                           kibana_font_fontawesome_webfont_ttf,
+	"kibana/font/fontawesome-webfont.woff":                          kibana_font_fontawesome_webfont_woff,
+	"kibana/img/annotation-icon.png":                                kibana_img_annotation_icon_png,
+	"kibana/img/cubes.png":                                          kibana_img_cubes_png,
+	"kibana/img/glyphicons-halflings-white.png":                     kibana_img_glyphicons_halflings_white_png,
+	"kibana/img/glyphicons-halflings.png":                           kibana_img_glyphicons_halflings_png,
+	"kibana/img/kibana.png":                                         kibana_img_kibana_png,
+	"kibana/img/light.png":                                          kibana_img_light_png,
+	"kibana/img/load.gif":                                           kibana_img_load_gif,
+	"kibana/img/load_big.gif":                                       kibana_img_load_big_gif,
+	"kibana/img/small.png":                                          kibana_img_small_png,
+	"kibana/index.html":                                             kibana_index_html,
+	"kibana/vendor/LICENSE.json":                                    kibana_vendor_license_json,
+	"kibana/vendor/bootstrap/less/tests/buttons.html":               kibana_vendor_bootstrap_less_tests_buttons_html,
+	"kibana/vendor/bootstrap/less/tests/css-tests.css":              kibana_vendor_bootstrap_less_tests_css_tests_css,
+	"kibana/vendor/bootstrap/less/tests/css-tests.html":             kibana_vendor_bootstrap_less_tests_css_tests_html,
+	"kibana/vendor/bootstrap/less/tests/forms-responsive.html":      kibana_vendor_bootstrap_less_tests_forms_responsive_html,
+	"kibana/vendor/bootstrap/less/tests/forms.html":                 kibana_vendor_bootstrap_less_tests_forms_html,
+	"kibana/vendor/bootstrap/less/tests/navbar-fixed-top.html":      kibana_vendor_bootstrap_less_tests_navbar_fixed_top_html,
+	"kibana/vendor/bootstrap/less/tests/navbar-static-top.html":     kibana_vendor_bootstrap_less_tests_navbar_static_top_html,
+	"kibana/vendor/bootstrap/less/tests/navbar.html":                kibana_vendor_bootstrap_less_tests_navbar_html,
+	"kibana/vendor/require/css-build.js":                            kibana_vendor_require_css_build_js,
+	"kibana/vendor/require/require.js":                              kibana_vendor_require_require_js,
+	"kibana/vendor/require/tmpl.js":                                 kibana_vendor_require_tmpl_js,
+	"kibana/vendor/timezone.js":                                     kibana_vendor_timezone_js,
 }
 
 // AssetDir returns the file names below a certain
@@ -3311,433 +3311,282 @@ func AssetDir(name string) ([]string, error) {
 }
 
 type _bintree_t struct {
-	Func func() (*asset, error)
+	Func     func() (*asset, error)
 	Children map[string]*_bintree_t
 }
+
 var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 	"kibana": &_bintree_t{nil, map[string]*_bintree_t{
-		"LICENSE.md": &_bintree_t{kibana_license_md, map[string]*_bintree_t{
-		}},
-		"README.md": &_bintree_t{kibana_readme_md, map[string]*_bintree_t{
-		}},
+		"LICENSE.md": &_bintree_t{kibana_license_md, map[string]*_bintree_t{}},
+		"README.md":  &_bintree_t{kibana_readme_md, map[string]*_bintree_t{}},
 		"app": &_bintree_t{nil, map[string]*_bintree_t{
-			"app.js": &_bintree_t{kibana_app_app_js, map[string]*_bintree_t{
-			}},
+			"app.js": &_bintree_t{kibana_app_app_js, map[string]*_bintree_t{}},
 			"components": &_bintree_t{nil, map[string]*_bintree_t{
-				"require.config.js": &_bintree_t{kibana_app_components_require_config_js, map[string]*_bintree_t{
-				}},
+				"require.config.js": &_bintree_t{kibana_app_components_require_config_js, map[string]*_bintree_t{}},
 			}},
 			"dashboards": &_bintree_t{nil, map[string]*_bintree_t{
-				"blank.json": &_bintree_t{kibana_app_dashboards_blank_json, map[string]*_bintree_t{
-				}},
-				"default.json": &_bintree_t{kibana_app_dashboards_default_json, map[string]*_bintree_t{
-				}},
-				"guided.json": &_bintree_t{kibana_app_dashboards_guided_json, map[string]*_bintree_t{
-				}},
-				"logstash.js": &_bintree_t{kibana_app_dashboards_logstash_js, map[string]*_bintree_t{
-				}},
-				"logstash.json": &_bintree_t{kibana_app_dashboards_logstash_json, map[string]*_bintree_t{
-				}},
-				"noted.json": &_bintree_t{kibana_app_dashboards_noted_json, map[string]*_bintree_t{
-				}},
+				"blank.json":    &_bintree_t{kibana_app_dashboards_blank_json, map[string]*_bintree_t{}},
+				"default.json":  &_bintree_t{kibana_app_dashboards_default_json, map[string]*_bintree_t{}},
+				"guided.json":   &_bintree_t{kibana_app_dashboards_guided_json, map[string]*_bintree_t{}},
+				"logstash.js":   &_bintree_t{kibana_app_dashboards_logstash_js, map[string]*_bintree_t{}},
+				"logstash.json": &_bintree_t{kibana_app_dashboards_logstash_json, map[string]*_bintree_t{}},
+				"noted.json":    &_bintree_t{kibana_app_dashboards_noted_json, map[string]*_bintree_t{}},
 			}},
 			"factories": &_bintree_t{nil, map[string]*_bintree_t{
-				"store.js": &_bintree_t{kibana_app_factories_store_js, map[string]*_bintree_t{
-				}},
+				"store.js": &_bintree_t{kibana_app_factories_store_js, map[string]*_bintree_t{}},
 			}},
 			"panels": &_bintree_t{nil, map[string]*_bintree_t{
 				"bettermap": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_bettermap_editor_html, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_bettermap_editor_html, map[string]*_bintree_t{}},
 					"leaflet": &_bintree_t{nil, map[string]*_bintree_t{
 						"images": &_bintree_t{nil, map[string]*_bintree_t{
-							"layers-2x.png": &_bintree_t{kibana_app_panels_bettermap_leaflet_images_layers_2x_png, map[string]*_bintree_t{
-							}},
-							"layers.png": &_bintree_t{kibana_app_panels_bettermap_leaflet_images_layers_png, map[string]*_bintree_t{
-							}},
-							"marker-icon-2x.png": &_bintree_t{kibana_app_panels_bettermap_leaflet_images_marker_icon_2x_png, map[string]*_bintree_t{
-							}},
-							"marker-icon.png": &_bintree_t{kibana_app_panels_bettermap_leaflet_images_marker_icon_png, map[string]*_bintree_t{
-							}},
-							"marker-shadow.png": &_bintree_t{kibana_app_panels_bettermap_leaflet_images_marker_shadow_png, map[string]*_bintree_t{
-							}},
+							"layers-2x.png":      &_bintree_t{kibana_app_panels_bettermap_leaflet_images_layers_2x_png, map[string]*_bintree_t{}},
+							"layers.png":         &_bintree_t{kibana_app_panels_bettermap_leaflet_images_layers_png, map[string]*_bintree_t{}},
+							"marker-icon-2x.png": &_bintree_t{kibana_app_panels_bettermap_leaflet_images_marker_icon_2x_png, map[string]*_bintree_t{}},
+							"marker-icon.png":    &_bintree_t{kibana_app_panels_bettermap_leaflet_images_marker_icon_png, map[string]*_bintree_t{}},
+							"marker-shadow.png":  &_bintree_t{kibana_app_panels_bettermap_leaflet_images_marker_shadow_png, map[string]*_bintree_t{}},
 						}},
-						"leaflet.css": &_bintree_t{kibana_app_panels_bettermap_leaflet_leaflet_css, map[string]*_bintree_t{
-						}},
-						"leaflet.ie.css": &_bintree_t{kibana_app_panels_bettermap_leaflet_leaflet_ie_css, map[string]*_bintree_t{
-						}},
-						"leaflet.js": &_bintree_t{kibana_app_panels_bettermap_leaflet_leaflet_js, map[string]*_bintree_t{
-						}},
-						"plugins.css": &_bintree_t{kibana_app_panels_bettermap_leaflet_plugins_css, map[string]*_bintree_t{
-						}},
-						"plugins.js": &_bintree_t{kibana_app_panels_bettermap_leaflet_plugins_js, map[string]*_bintree_t{
-						}},
+						"leaflet.css":    &_bintree_t{kibana_app_panels_bettermap_leaflet_leaflet_css, map[string]*_bintree_t{}},
+						"leaflet.ie.css": &_bintree_t{kibana_app_panels_bettermap_leaflet_leaflet_ie_css, map[string]*_bintree_t{}},
+						"leaflet.js":     &_bintree_t{kibana_app_panels_bettermap_leaflet_leaflet_js, map[string]*_bintree_t{}},
+						"plugins.css":    &_bintree_t{kibana_app_panels_bettermap_leaflet_plugins_css, map[string]*_bintree_t{}},
+						"plugins.js":     &_bintree_t{kibana_app_panels_bettermap_leaflet_plugins_js, map[string]*_bintree_t{}},
 					}},
-					"module.css": &_bintree_t{kibana_app_panels_bettermap_module_css, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_bettermap_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_bettermap_module_js, map[string]*_bintree_t{
-					}},
+					"module.css":  &_bintree_t{kibana_app_panels_bettermap_module_css, map[string]*_bintree_t{}},
+					"module.html": &_bintree_t{kibana_app_panels_bettermap_module_html, map[string]*_bintree_t{}},
+					"module.js":   &_bintree_t{kibana_app_panels_bettermap_module_js, map[string]*_bintree_t{}},
 				}},
 				"column": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_column_editor_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_column_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_column_module_js, map[string]*_bintree_t{
-					}},
-					"panelgeneral.html": &_bintree_t{kibana_app_panels_column_panelgeneral_html, map[string]*_bintree_t{
-					}},
+					"editor.html":       &_bintree_t{kibana_app_panels_column_editor_html, map[string]*_bintree_t{}},
+					"module.html":       &_bintree_t{kibana_app_panels_column_module_html, map[string]*_bintree_t{}},
+					"module.js":         &_bintree_t{kibana_app_panels_column_module_js, map[string]*_bintree_t{}},
+					"panelgeneral.html": &_bintree_t{kibana_app_panels_column_panelgeneral_html, map[string]*_bintree_t{}},
 				}},
 				"dashcontrol": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_dashcontrol_editor_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_dashcontrol_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_dashcontrol_module_js, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_dashcontrol_editor_html, map[string]*_bintree_t{}},
+					"module.html": &_bintree_t{kibana_app_panels_dashcontrol_module_html, map[string]*_bintree_t{}},
+					"module.js":   &_bintree_t{kibana_app_panels_dashcontrol_module_js, map[string]*_bintree_t{}},
 				}},
 				"derivequeries": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_derivequeries_editor_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_derivequeries_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_derivequeries_module_js, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_derivequeries_editor_html, map[string]*_bintree_t{}},
+					"module.html": &_bintree_t{kibana_app_panels_derivequeries_module_html, map[string]*_bintree_t{}},
+					"module.js":   &_bintree_t{kibana_app_panels_derivequeries_module_js, map[string]*_bintree_t{}},
 				}},
 				"fields": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_fields_editor_html, map[string]*_bintree_t{
-					}},
-					"micropanel.html": &_bintree_t{kibana_app_panels_fields_micropanel_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_fields_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_fields_module_js, map[string]*_bintree_t{
-					}},
+					"editor.html":     &_bintree_t{kibana_app_panels_fields_editor_html, map[string]*_bintree_t{}},
+					"micropanel.html": &_bintree_t{kibana_app_panels_fields_micropanel_html, map[string]*_bintree_t{}},
+					"module.html":     &_bintree_t{kibana_app_panels_fields_module_html, map[string]*_bintree_t{}},
+					"module.js":       &_bintree_t{kibana_app_panels_fields_module_js, map[string]*_bintree_t{}},
 				}},
 				"filtering": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_filtering_editor_html, map[string]*_bintree_t{
-					}},
-					"meta.html": &_bintree_t{kibana_app_panels_filtering_meta_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_filtering_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_filtering_module_js, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_filtering_editor_html, map[string]*_bintree_t{}},
+					"meta.html":   &_bintree_t{kibana_app_panels_filtering_meta_html, map[string]*_bintree_t{}},
+					"module.html": &_bintree_t{kibana_app_panels_filtering_module_html, map[string]*_bintree_t{}},
+					"module.js":   &_bintree_t{kibana_app_panels_filtering_module_js, map[string]*_bintree_t{}},
 				}},
 				"goal": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_goal_editor_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_goal_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_goal_module_js, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_goal_editor_html, map[string]*_bintree_t{}},
+					"module.html": &_bintree_t{kibana_app_panels_goal_module_html, map[string]*_bintree_t{}},
+					"module.js":   &_bintree_t{kibana_app_panels_goal_module_js, map[string]*_bintree_t{}},
 				}},
 				"histogram": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_histogram_editor_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_histogram_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_histogram_module_js, map[string]*_bintree_t{
-					}},
-					"queriesEditor.html": &_bintree_t{kibana_app_panels_histogram_querieseditor_html, map[string]*_bintree_t{
-					}},
-					"styleEditor.html": &_bintree_t{kibana_app_panels_histogram_styleeditor_html, map[string]*_bintree_t{
-					}},
+					"editor.html":        &_bintree_t{kibana_app_panels_histogram_editor_html, map[string]*_bintree_t{}},
+					"module.html":        &_bintree_t{kibana_app_panels_histogram_module_html, map[string]*_bintree_t{}},
+					"module.js":          &_bintree_t{kibana_app_panels_histogram_module_js, map[string]*_bintree_t{}},
+					"queriesEditor.html": &_bintree_t{kibana_app_panels_histogram_querieseditor_html, map[string]*_bintree_t{}},
+					"styleEditor.html":   &_bintree_t{kibana_app_panels_histogram_styleeditor_html, map[string]*_bintree_t{}},
 				}},
 				"hits": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_hits_editor_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_hits_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_hits_module_js, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_hits_editor_html, map[string]*_bintree_t{}},
+					"module.html": &_bintree_t{kibana_app_panels_hits_module_html, map[string]*_bintree_t{}},
+					"module.js":   &_bintree_t{kibana_app_panels_hits_module_js, map[string]*_bintree_t{}},
 				}},
 				"map": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_map_editor_html, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_map_editor_html, map[string]*_bintree_t{}},
 					"lib": &_bintree_t{nil, map[string]*_bintree_t{
-						"map.europe.js": &_bintree_t{kibana_app_panels_map_lib_map_europe_js, map[string]*_bintree_t{
-						}},
-						"map.usa.js": &_bintree_t{kibana_app_panels_map_lib_map_usa_js, map[string]*_bintree_t{
-						}},
-						"map.world.js": &_bintree_t{kibana_app_panels_map_lib_map_world_js, map[string]*_bintree_t{
-						}},
+						"map.europe.js": &_bintree_t{kibana_app_panels_map_lib_map_europe_js, map[string]*_bintree_t{}},
+						"map.usa.js":    &_bintree_t{kibana_app_panels_map_lib_map_usa_js, map[string]*_bintree_t{}},
+						"map.world.js":  &_bintree_t{kibana_app_panels_map_lib_map_world_js, map[string]*_bintree_t{}},
 					}},
-					"module.html": &_bintree_t{kibana_app_panels_map_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_map_module_js, map[string]*_bintree_t{
-					}},
+					"module.html": &_bintree_t{kibana_app_panels_map_module_html, map[string]*_bintree_t{}},
+					"module.js":   &_bintree_t{kibana_app_panels_map_module_js, map[string]*_bintree_t{}},
 				}},
 				"query": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_query_editor_html, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_query_editor_html, map[string]*_bintree_t{}},
 					"editors": &_bintree_t{nil, map[string]*_bintree_t{
-						"lucene.html": &_bintree_t{kibana_app_panels_query_editors_lucene_html, map[string]*_bintree_t{
-						}},
-						"regex.html": &_bintree_t{kibana_app_panels_query_editors_regex_html, map[string]*_bintree_t{
-						}},
-						"topN.html": &_bintree_t{kibana_app_panels_query_editors_topn_html, map[string]*_bintree_t{
-						}},
+						"lucene.html": &_bintree_t{kibana_app_panels_query_editors_lucene_html, map[string]*_bintree_t{}},
+						"regex.html":  &_bintree_t{kibana_app_panels_query_editors_regex_html, map[string]*_bintree_t{}},
+						"topN.html":   &_bintree_t{kibana_app_panels_query_editors_topn_html, map[string]*_bintree_t{}},
 					}},
 					"help": &_bintree_t{nil, map[string]*_bintree_t{
-						"lucene.html": &_bintree_t{kibana_app_panels_query_help_lucene_html, map[string]*_bintree_t{
-						}},
-						"regex.html": &_bintree_t{kibana_app_panels_query_help_regex_html, map[string]*_bintree_t{
-						}},
-						"topN.html": &_bintree_t{kibana_app_panels_query_help_topn_html, map[string]*_bintree_t{
-						}},
+						"lucene.html": &_bintree_t{kibana_app_panels_query_help_lucene_html, map[string]*_bintree_t{}},
+						"regex.html":  &_bintree_t{kibana_app_panels_query_help_regex_html, map[string]*_bintree_t{}},
+						"topN.html":   &_bintree_t{kibana_app_panels_query_help_topn_html, map[string]*_bintree_t{}},
 					}},
-					"helpModal.html": &_bintree_t{kibana_app_panels_query_helpmodal_html, map[string]*_bintree_t{
-					}},
-					"meta.html": &_bintree_t{kibana_app_panels_query_meta_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_query_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_query_module_js, map[string]*_bintree_t{
-					}},
-					"query.css": &_bintree_t{kibana_app_panels_query_query_css, map[string]*_bintree_t{
-					}},
+					"helpModal.html": &_bintree_t{kibana_app_panels_query_helpmodal_html, map[string]*_bintree_t{}},
+					"meta.html":      &_bintree_t{kibana_app_panels_query_meta_html, map[string]*_bintree_t{}},
+					"module.html":    &_bintree_t{kibana_app_panels_query_module_html, map[string]*_bintree_t{}},
+					"module.js":      &_bintree_t{kibana_app_panels_query_module_js, map[string]*_bintree_t{}},
+					"query.css":      &_bintree_t{kibana_app_panels_query_query_css, map[string]*_bintree_t{}},
 				}},
 				"sparklines": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_sparklines_editor_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_sparklines_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_sparklines_module_js, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_sparklines_editor_html, map[string]*_bintree_t{}},
+					"module.html": &_bintree_t{kibana_app_panels_sparklines_module_html, map[string]*_bintree_t{}},
+					"module.js":   &_bintree_t{kibana_app_panels_sparklines_module_js, map[string]*_bintree_t{}},
 				}},
 				"stats": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_stats_editor_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_stats_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_stats_module_js, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_stats_editor_html, map[string]*_bintree_t{}},
+					"module.html": &_bintree_t{kibana_app_panels_stats_module_html, map[string]*_bintree_t{}},
+					"module.js":   &_bintree_t{kibana_app_panels_stats_module_js, map[string]*_bintree_t{}},
 				}},
 				"table": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_table_editor_html, map[string]*_bintree_t{
-					}},
-					"micropanel.html": &_bintree_t{kibana_app_panels_table_micropanel_html, map[string]*_bintree_t{
-					}},
-					"modal.html": &_bintree_t{kibana_app_panels_table_modal_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_table_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_table_module_js, map[string]*_bintree_t{
-					}},
-					"pagination.html": &_bintree_t{kibana_app_panels_table_pagination_html, map[string]*_bintree_t{
-					}},
+					"editor.html":     &_bintree_t{kibana_app_panels_table_editor_html, map[string]*_bintree_t{}},
+					"micropanel.html": &_bintree_t{kibana_app_panels_table_micropanel_html, map[string]*_bintree_t{}},
+					"modal.html":      &_bintree_t{kibana_app_panels_table_modal_html, map[string]*_bintree_t{}},
+					"module.html":     &_bintree_t{kibana_app_panels_table_module_html, map[string]*_bintree_t{}},
+					"module.js":       &_bintree_t{kibana_app_panels_table_module_js, map[string]*_bintree_t{}},
+					"pagination.html": &_bintree_t{kibana_app_panels_table_pagination_html, map[string]*_bintree_t{}},
 				}},
 				"terms": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_terms_editor_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_terms_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_terms_module_js, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_terms_editor_html, map[string]*_bintree_t{}},
+					"module.html": &_bintree_t{kibana_app_panels_terms_module_html, map[string]*_bintree_t{}},
+					"module.js":   &_bintree_t{kibana_app_panels_terms_module_js, map[string]*_bintree_t{}},
 				}},
 				"text": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_text_editor_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_text_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_text_module_js, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_text_editor_html, map[string]*_bintree_t{}},
+					"module.html": &_bintree_t{kibana_app_panels_text_module_html, map[string]*_bintree_t{}},
+					"module.js":   &_bintree_t{kibana_app_panels_text_module_js, map[string]*_bintree_t{}},
 				}},
 				"timepicker": &_bintree_t{nil, map[string]*_bintree_t{
-					"custom.html": &_bintree_t{kibana_app_panels_timepicker_custom_html, map[string]*_bintree_t{
-					}},
-					"editor.html": &_bintree_t{kibana_app_panels_timepicker_editor_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_timepicker_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_timepicker_module_js, map[string]*_bintree_t{
-					}},
-					"refreshctrl.html": &_bintree_t{kibana_app_panels_timepicker_refreshctrl_html, map[string]*_bintree_t{
-					}},
+					"custom.html":      &_bintree_t{kibana_app_panels_timepicker_custom_html, map[string]*_bintree_t{}},
+					"editor.html":      &_bintree_t{kibana_app_panels_timepicker_editor_html, map[string]*_bintree_t{}},
+					"module.html":      &_bintree_t{kibana_app_panels_timepicker_module_html, map[string]*_bintree_t{}},
+					"module.js":        &_bintree_t{kibana_app_panels_timepicker_module_js, map[string]*_bintree_t{}},
+					"refreshctrl.html": &_bintree_t{kibana_app_panels_timepicker_refreshctrl_html, map[string]*_bintree_t{}},
 				}},
 				"trends": &_bintree_t{nil, map[string]*_bintree_t{
-					"editor.html": &_bintree_t{kibana_app_panels_trends_editor_html, map[string]*_bintree_t{
-					}},
-					"module.html": &_bintree_t{kibana_app_panels_trends_module_html, map[string]*_bintree_t{
-					}},
-					"module.js": &_bintree_t{kibana_app_panels_trends_module_js, map[string]*_bintree_t{
-					}},
+					"editor.html": &_bintree_t{kibana_app_panels_trends_editor_html, map[string]*_bintree_t{}},
+					"module.html": &_bintree_t{kibana_app_panels_trends_module_html, map[string]*_bintree_t{}},
+					"module.js":   &_bintree_t{kibana_app_panels_trends_module_js, map[string]*_bintree_t{}},
 				}},
 			}},
 			"partials": &_bintree_t{nil, map[string]*_bintree_t{
-				"connectionFailed.html": &_bintree_t{kibana_app_partials_connectionfailed_html, map[string]*_bintree_t{
-				}},
-				"dashLoader.html": &_bintree_t{kibana_app_partials_dashloader_html, map[string]*_bintree_t{
-				}},
-				"dashLoaderShare.html": &_bintree_t{kibana_app_partials_dashloadershare_html, map[string]*_bintree_t{
-				}},
-				"dashboard.html": &_bintree_t{kibana_app_partials_dashboard_html, map[string]*_bintree_t{
-				}},
-				"dasheditor.html": &_bintree_t{kibana_app_partials_dasheditor_html, map[string]*_bintree_t{
-				}},
-				"inspector.html": &_bintree_t{kibana_app_partials_inspector_html, map[string]*_bintree_t{
-				}},
-				"load.html": &_bintree_t{kibana_app_partials_load_html, map[string]*_bintree_t{
-				}},
-				"modal.html": &_bintree_t{kibana_app_partials_modal_html, map[string]*_bintree_t{
-				}},
-				"paneladd.html": &_bintree_t{kibana_app_partials_paneladd_html, map[string]*_bintree_t{
-				}},
-				"paneleditor.html": &_bintree_t{kibana_app_partials_paneleditor_html, map[string]*_bintree_t{
-				}},
-				"panelgeneral.html": &_bintree_t{kibana_app_partials_panelgeneral_html, map[string]*_bintree_t{
-				}},
-				"querySelect.html": &_bintree_t{kibana_app_partials_queryselect_html, map[string]*_bintree_t{
-				}},
-				"roweditor.html": &_bintree_t{kibana_app_partials_roweditor_html, map[string]*_bintree_t{
-				}},
+				"connectionFailed.html": &_bintree_t{kibana_app_partials_connectionfailed_html, map[string]*_bintree_t{}},
+				"dashLoader.html":       &_bintree_t{kibana_app_partials_dashloader_html, map[string]*_bintree_t{}},
+				"dashLoaderShare.html":  &_bintree_t{kibana_app_partials_dashloadershare_html, map[string]*_bintree_t{}},
+				"dashboard.html":        &_bintree_t{kibana_app_partials_dashboard_html, map[string]*_bintree_t{}},
+				"dasheditor.html":       &_bintree_t{kibana_app_partials_dasheditor_html, map[string]*_bintree_t{}},
+				"inspector.html":        &_bintree_t{kibana_app_partials_inspector_html, map[string]*_bintree_t{}},
+				"load.html":             &_bintree_t{kibana_app_partials_load_html, map[string]*_bintree_t{}},
+				"modal.html":            &_bintree_t{kibana_app_partials_modal_html, map[string]*_bintree_t{}},
+				"paneladd.html":         &_bintree_t{kibana_app_partials_paneladd_html, map[string]*_bintree_t{}},
+				"paneleditor.html":      &_bintree_t{kibana_app_partials_paneleditor_html, map[string]*_bintree_t{}},
+				"panelgeneral.html":     &_bintree_t{kibana_app_partials_panelgeneral_html, map[string]*_bintree_t{}},
+				"querySelect.html":      &_bintree_t{kibana_app_partials_queryselect_html, map[string]*_bintree_t{}},
+				"roweditor.html":        &_bintree_t{kibana_app_partials_roweditor_html, map[string]*_bintree_t{}},
 			}},
 		}},
-		"build.txt": &_bintree_t{kibana_build_txt, map[string]*_bintree_t{
-		}},
-		"config.js": &_bintree_t{kibana_config_js, map[string]*_bintree_t{
-		}},
+		"build.txt": &_bintree_t{kibana_build_txt, map[string]*_bintree_t{}},
+		"config.js": &_bintree_t{kibana_config_js, map[string]*_bintree_t{}},
 		"css": &_bintree_t{nil, map[string]*_bintree_t{
-			"animate.min.css": &_bintree_t{kibana_css_animate_min_css, map[string]*_bintree_t{
-			}},
-			"bootstrap-responsive.min.css": &_bintree_t{kibana_css_bootstrap_responsive_min_css, map[string]*_bintree_t{
-			}},
-			"bootstrap.dark.less": &_bintree_t{kibana_css_bootstrap_dark_less, map[string]*_bintree_t{
-			}},
-			"bootstrap.dark.min.css": &_bintree_t{kibana_css_bootstrap_dark_min_css, map[string]*_bintree_t{
-			}},
-			"bootstrap.light.less": &_bintree_t{kibana_css_bootstrap_light_less, map[string]*_bintree_t{
-			}},
-			"bootstrap.light.min.css": &_bintree_t{kibana_css_bootstrap_light_min_css, map[string]*_bintree_t{
-			}},
-			"font-awesome.min.css": &_bintree_t{kibana_css_font_awesome_min_css, map[string]*_bintree_t{
-			}},
-			"normalize.min.css": &_bintree_t{kibana_css_normalize_min_css, map[string]*_bintree_t{
-			}},
-			"timepicker.css": &_bintree_t{kibana_css_timepicker_css, map[string]*_bintree_t{
-			}},
+			"animate.min.css":              &_bintree_t{kibana_css_animate_min_css, map[string]*_bintree_t{}},
+			"bootstrap-responsive.min.css": &_bintree_t{kibana_css_bootstrap_responsive_min_css, map[string]*_bintree_t{}},
+			"bootstrap.dark.less":          &_bintree_t{kibana_css_bootstrap_dark_less, map[string]*_bintree_t{}},
+			"bootstrap.dark.min.css":       &_bintree_t{kibana_css_bootstrap_dark_min_css, map[string]*_bintree_t{}},
+			"bootstrap.light.less":         &_bintree_t{kibana_css_bootstrap_light_less, map[string]*_bintree_t{}},
+			"bootstrap.light.min.css":      &_bintree_t{kibana_css_bootstrap_light_min_css, map[string]*_bintree_t{}},
+			"font-awesome.min.css":         &_bintree_t{kibana_css_font_awesome_min_css, map[string]*_bintree_t{}},
+			"normalize.min.css":            &_bintree_t{kibana_css_normalize_min_css, map[string]*_bintree_t{}},
+			"timepicker.css":               &_bintree_t{kibana_css_timepicker_css, map[string]*_bintree_t{}},
 		}},
-		"favicon.ico": &_bintree_t{kibana_favicon_ico, map[string]*_bintree_t{
-		}},
+		"favicon.ico": &_bintree_t{kibana_favicon_ico, map[string]*_bintree_t{}},
 		"font": &_bintree_t{nil, map[string]*_bintree_t{
-			"FontAwesome.otf": &_bintree_t{kibana_font_fontawesome_otf, map[string]*_bintree_t{
-			}},
-			"fontawesome-webfont.eot": &_bintree_t{kibana_font_fontawesome_webfont_eot, map[string]*_bintree_t{
-			}},
-			"fontawesome-webfont.svg": &_bintree_t{kibana_font_fontawesome_webfont_svg, map[string]*_bintree_t{
-			}},
-			"fontawesome-webfont.ttf": &_bintree_t{kibana_font_fontawesome_webfont_ttf, map[string]*_bintree_t{
-			}},
-			"fontawesome-webfont.woff": &_bintree_t{kibana_font_fontawesome_webfont_woff, map[string]*_bintree_t{
-			}},
+			"FontAwesome.otf":          &_bintree_t{kibana_font_fontawesome_otf, map[string]*_bintree_t{}},
+			"fontawesome-webfont.eot":  &_bintree_t{kibana_font_fontawesome_webfont_eot, map[string]*_bintree_t{}},
+			"fontawesome-webfont.svg":  &_bintree_t{kibana_font_fontawesome_webfont_svg, map[string]*_bintree_t{}},
+			"fontawesome-webfont.ttf":  &_bintree_t{kibana_font_fontawesome_webfont_ttf, map[string]*_bintree_t{}},
+			"fontawesome-webfont.woff": &_bintree_t{kibana_font_fontawesome_webfont_woff, map[string]*_bintree_t{}},
 		}},
 		"img": &_bintree_t{nil, map[string]*_bintree_t{
-			"annotation-icon.png": &_bintree_t{kibana_img_annotation_icon_png, map[string]*_bintree_t{
-			}},
-			"cubes.png": &_bintree_t{kibana_img_cubes_png, map[string]*_bintree_t{
-			}},
-			"glyphicons-halflings-white.png": &_bintree_t{kibana_img_glyphicons_halflings_white_png, map[string]*_bintree_t{
-			}},
-			"glyphicons-halflings.png": &_bintree_t{kibana_img_glyphicons_halflings_png, map[string]*_bintree_t{
-			}},
-			"kibana.png": &_bintree_t{kibana_img_kibana_png, map[string]*_bintree_t{
-			}},
-			"light.png": &_bintree_t{kibana_img_light_png, map[string]*_bintree_t{
-			}},
-			"load.gif": &_bintree_t{kibana_img_load_gif, map[string]*_bintree_t{
-			}},
-			"load_big.gif": &_bintree_t{kibana_img_load_big_gif, map[string]*_bintree_t{
-			}},
-			"small.png": &_bintree_t{kibana_img_small_png, map[string]*_bintree_t{
-			}},
+			"annotation-icon.png":            &_bintree_t{kibana_img_annotation_icon_png, map[string]*_bintree_t{}},
+			"cubes.png":                      &_bintree_t{kibana_img_cubes_png, map[string]*_bintree_t{}},
+			"glyphicons-halflings-white.png": &_bintree_t{kibana_img_glyphicons_halflings_white_png, map[string]*_bintree_t{}},
+			"glyphicons-halflings.png":       &_bintree_t{kibana_img_glyphicons_halflings_png, map[string]*_bintree_t{}},
+			"kibana.png":                     &_bintree_t{kibana_img_kibana_png, map[string]*_bintree_t{}},
+			"light.png":                      &_bintree_t{kibana_img_light_png, map[string]*_bintree_t{}},
+			"load.gif":                       &_bintree_t{kibana_img_load_gif, map[string]*_bintree_t{}},
+			"load_big.gif":                   &_bintree_t{kibana_img_load_big_gif, map[string]*_bintree_t{}},
+			"small.png":                      &_bintree_t{kibana_img_small_png, map[string]*_bintree_t{}},
 		}},
-		"index.html": &_bintree_t{kibana_index_html, map[string]*_bintree_t{
-		}},
+		"index.html": &_bintree_t{kibana_index_html, map[string]*_bintree_t{}},
 		"vendor": &_bintree_t{nil, map[string]*_bintree_t{
-			"LICENSE.json": &_bintree_t{kibana_vendor_license_json, map[string]*_bintree_t{
-			}},
+			"LICENSE.json": &_bintree_t{kibana_vendor_license_json, map[string]*_bintree_t{}},
 			"bootstrap": &_bintree_t{nil, map[string]*_bintree_t{
 				"less": &_bintree_t{nil, map[string]*_bintree_t{
 					"tests": &_bintree_t{nil, map[string]*_bintree_t{
-						"buttons.html": &_bintree_t{kibana_vendor_bootstrap_less_tests_buttons_html, map[string]*_bintree_t{
-						}},
-						"css-tests.css": &_bintree_t{kibana_vendor_bootstrap_less_tests_css_tests_css, map[string]*_bintree_t{
-						}},
-						"css-tests.html": &_bintree_t{kibana_vendor_bootstrap_less_tests_css_tests_html, map[string]*_bintree_t{
-						}},
-						"forms-responsive.html": &_bintree_t{kibana_vendor_bootstrap_less_tests_forms_responsive_html, map[string]*_bintree_t{
-						}},
-						"forms.html": &_bintree_t{kibana_vendor_bootstrap_less_tests_forms_html, map[string]*_bintree_t{
-						}},
-						"navbar-fixed-top.html": &_bintree_t{kibana_vendor_bootstrap_less_tests_navbar_fixed_top_html, map[string]*_bintree_t{
-						}},
-						"navbar-static-top.html": &_bintree_t{kibana_vendor_bootstrap_less_tests_navbar_static_top_html, map[string]*_bintree_t{
-						}},
-						"navbar.html": &_bintree_t{kibana_vendor_bootstrap_less_tests_navbar_html, map[string]*_bintree_t{
-						}},
+						"buttons.html":           &_bintree_t{kibana_vendor_bootstrap_less_tests_buttons_html, map[string]*_bintree_t{}},
+						"css-tests.css":          &_bintree_t{kibana_vendor_bootstrap_less_tests_css_tests_css, map[string]*_bintree_t{}},
+						"css-tests.html":         &_bintree_t{kibana_vendor_bootstrap_less_tests_css_tests_html, map[string]*_bintree_t{}},
+						"forms-responsive.html":  &_bintree_t{kibana_vendor_bootstrap_less_tests_forms_responsive_html, map[string]*_bintree_t{}},
+						"forms.html":             &_bintree_t{kibana_vendor_bootstrap_less_tests_forms_html, map[string]*_bintree_t{}},
+						"navbar-fixed-top.html":  &_bintree_t{kibana_vendor_bootstrap_less_tests_navbar_fixed_top_html, map[string]*_bintree_t{}},
+						"navbar-static-top.html": &_bintree_t{kibana_vendor_bootstrap_less_tests_navbar_static_top_html, map[string]*_bintree_t{}},
+						"navbar.html":            &_bintree_t{kibana_vendor_bootstrap_less_tests_navbar_html, map[string]*_bintree_t{}},
 					}},
 				}},
 			}},
 			"require": &_bintree_t{nil, map[string]*_bintree_t{
-				"css-build.js": &_bintree_t{kibana_vendor_require_css_build_js, map[string]*_bintree_t{
-				}},
-				"require.js": &_bintree_t{kibana_vendor_require_require_js, map[string]*_bintree_t{
-				}},
-				"tmpl.js": &_bintree_t{kibana_vendor_require_tmpl_js, map[string]*_bintree_t{
-				}},
+				"css-build.js": &_bintree_t{kibana_vendor_require_css_build_js, map[string]*_bintree_t{}},
+				"require.js":   &_bintree_t{kibana_vendor_require_require_js, map[string]*_bintree_t{}},
+				"tmpl.js":      &_bintree_t{kibana_vendor_require_tmpl_js, map[string]*_bintree_t{}},
 			}},
-			"timezone.js": &_bintree_t{kibana_vendor_timezone_js, map[string]*_bintree_t{
-			}},
+			"timezone.js": &_bintree_t{kibana_vendor_timezone_js, map[string]*_bintree_t{}},
 		}},
 	}},
 }}
 
 // Restore an asset under the given directory
 func RestoreAsset(dir, name string) error {
-        data, err := Asset(name)
-        if err != nil {
-                return err
-        }
-        info, err := AssetInfo(name)
-        if err != nil {
-                return err
-        }
-        err = os.MkdirAll(_filePath(dir, path.Dir(name)), os.FileMode(0755))
-        if err != nil {
-                return err
-        }
-        err = ioutil.WriteFile(_filePath(dir, name), data, info.Mode())
-        if err != nil {
-                return err
-        }
-        err = os.Chtimes(_filePath(dir, name), info.ModTime(), info.ModTime())
-        if err != nil {
-                return err
-        }
-        return nil
+	data, err := Asset(name)
+	if err != nil {
+		return err
+	}
+	info, err := AssetInfo(name)
+	if err != nil {
+		return err
+	}
+	err = os.MkdirAll(_filePath(dir, path.Dir(name)), os.FileMode(0755))
+	if err != nil {
+		return err
+	}
+	err = ioutil.WriteFile(_filePath(dir, name), data, info.Mode())
+	if err != nil {
+		return err
+	}
+	err = os.Chtimes(_filePath(dir, name), info.ModTime(), info.ModTime())
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // Restore assets under the given directory recursively
 func RestoreAssets(dir, name string) error {
-        children, err := AssetDir(name)
-        if err != nil { // File
-                return RestoreAsset(dir, name)
-        } else { // Dir
-                for _, child := range children {
-                        err = RestoreAssets(dir, path.Join(name, child))
-                        if err != nil {
-                                return err
-                        }
-                }
-        }
-        return nil
+	children, err := AssetDir(name)
+	if err != nil { // File
+		return RestoreAsset(dir, name)
+	} else { // Dir
+		for _, child := range children {
+			err = RestoreAssets(dir, path.Join(name, child))
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
 }
 
 func _filePath(dir, name string) string {
-        cannonicalName := strings.Replace(name, "\\", "/", -1)
-        return filepath.Join(append([]string{dir}, strings.Split(cannonicalName, "/")...)...)
+	cannonicalName := strings.Replace(name, "\\", "/", -1)
+	return filepath.Join(append([]string{dir}, strings.Split(cannonicalName, "/")...)...)
 }
-
