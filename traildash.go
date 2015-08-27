@@ -101,6 +101,29 @@ type cloudtrailNotification struct {
 	ReceiptHandle string
 }
 
+type s3BucketRef struct {
+  Name  string
+  Arn   string
+}
+
+type s3ObjectRef struct {
+  Key  string
+  Size int
+}
+
+type s3Ref struct {
+  Bucket s3BucketRef
+  Object s3ObjectRef
+}
+
+type s3Notification struct {
+  S3 s3Ref
+}
+
+type s3Notifications struct {
+	Records      []s3Notification
+}
+
 type cloudtrailLog struct {
 	Records []cloudtrailRecord
 }
@@ -327,6 +350,22 @@ func (c *config) dequeue() (*cloudtrailNotification, error) {
 	} else if err := json.Unmarshal([]byte(not.Message), &n); err != nil {
 		return nil, fmt.Errorf("CloudTrail JSON error [id: %s]: %s", not.MessageID, err.Error())
 	}
+	
+	if len(n.S3ObjectKey) < 1 {
+	  s3n := s3Notifications{}
+	  if err := json.Unmarshal([]byte(not.Message), &s3n); err != nil {
+			return nil, fmt.Errorf("CloudTrail JSON error [id: %s]: %s", not.MessageID, err.Error())
+		}
+
+		if len(s3n.Records) > 0 {
+		  n.S3ObjectKey = make([]string, len(s3n.Records))
+			for i, r := range s3n.Records {
+			  n.S3ObjectKey[i] = r.S3.Object.Key
+			  n.S3Bucket = r.S3.Bucket.Name
+			}
+		}
+	}
+	
 	return &n, nil
 }
 
