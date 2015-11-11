@@ -3,7 +3,10 @@ KIBANA_VERSION=3.1.2
 
 deps:
 	go get github.com/aws/aws-sdk-go
-	glock sync github.com/appliedtrust/traildash
+	go get github.com/robfig/glock
+	go get -u github.com/jteeuwen/go-bindata/...
+	go get github.com/appliedtrust/traildash
+	bin/glock sync github.com/appliedtrust/traildash
 
 dist-clean:
 	rm -rf dist
@@ -22,7 +25,7 @@ kibana:
 	mv kibana-$(KIBANA_VERSION) kibana
 	cp assets/config.js kibana/config.js
 	cp assets/CloudTrail.json kibana/app/dashboards/default.json
-	GOOS=linux go-bindata -pkg="main" kibana/...
+	GOOS=linux bin/go-bindata -pkg="main" kibana/...
 	rm -rf kibana
 
 docker: dist
