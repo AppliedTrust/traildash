@@ -6,7 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/session"
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/sqs"
 	"io"
@@ -292,11 +292,11 @@ func (c *config) workLogs() {
 // dequeue fetches an item from SQS
 func (c *config) dequeue() (*cloudtrailNotification, error) {
 	numRequested := 1
-	sess := session.New(awsConfig)
+	sess := session.New(&c.awsConfig)
 	q := sqs.New(sess)
 
 	req := sqs.ReceiveMessageInput{
-		QueueURL:            aws.String(c.queueURL),
+		QueueUrl:            aws.String(c.queueURL),
 		MaxNumberOfMessages: aws.Int64(int64(numRequested)),
 		WaitTimeSeconds:     aws.Int64(20), // max allowed
 	}
@@ -337,7 +337,7 @@ func (c *config) download(m *cloudtrailNotification) (*[]cloudtrailRecord, error
 	if len(m.S3ObjectKey) != 1 {
 		return nil, fmt.Errorf("Expected one S3 key but got %d", len(m.S3ObjectKey[0]))
 	}
-	sess := session.New(awsConfig)
+	sess := session.New(&c.awsConfig)
 	s := s3.New(sess)
 	q := s3.GetObjectInput{
 		Bucket: aws.String(m.S3Bucket),
@@ -391,10 +391,10 @@ func (c *config) load(records *[]cloudtrailRecord) error {
 
 // deleteSQS removes a completed notification from the queue
 func (c *config) deleteSQS(m *cloudtrailNotification) error {
-	sess := session.New(awsConfig)
+	sess := session.New(&c.awsConfig)
 	q := sqs.New(sess)
 	req := sqs.DeleteMessageInput{
-		QueueURL:      aws.String(c.queueURL),
+		QueueUrl:      aws.String(c.queueURL),
 		ReceiptHandle: aws.String(m.ReceiptHandle),
 	}
 	_, err := q.DeleteMessage(&req)
