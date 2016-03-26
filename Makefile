@@ -2,7 +2,7 @@ TAG:=`git describe --abbrev=0 --tags`
 
 deps:
 	go get github.com/aws/aws-sdk-go
-	glock sync github.com/appliedtrust/traildash
+	glock sync github.com/MonsantoCo/traildash
 
 dist-clean:
 	rm -rf dist

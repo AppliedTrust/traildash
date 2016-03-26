@@ -1,11 +1,9 @@
-FROM golang
+FROM golang:1.6
 
 ADD dist/linux/amd64/traildash /usr/local/traildash/traildash
 
-ADD assets/start /root/start
+RUN chmod 755 /usr/local/traildash/traildash
 
-RUN chmod 755 /root/start /usr/local/traildash/traildash
-
-CMD ["/root/start"]
+CMD ["/usr/local/traildash/traildash"]
 
 
