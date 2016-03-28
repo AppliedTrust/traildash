@@ -65,7 +65,6 @@ AWS Credentials can be provided by either:
 
 #### Optional Environment Variables:
 	AWS_REGION		AWS Region (SQS and S3 regions must match. default: us-east-1).
-	WEB_LISTEN		Listen IP and port for web interface (default: 0.0.0.0:7000).
 	ES_URL			ElasticSearch URL (default: http://localhost:9200).
 	DEBUG			Enable debugging output.
 	SSL_MODE		"off": disable HTTPS and use HTTP (default)
