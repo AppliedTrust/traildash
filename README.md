@@ -1,3 +1,7 @@
+![Unsupported](https://img.shields.io/badge/development_status-unsupported-red.svg)
+
+## Traildash has been retired - AWS now offers a built-in solution based on the same technology (ElasticSearch and Kibana): https://aws.amazon.com/blogs/aws/cloudwatch-logs-subscription-consumer-elasticsearch-kibana-dashboards/
+
 # Traildash: AWS CloudTrail Dashboard
 Traildash is a simple, yet powerful, dashboard for AWS CloudTrail logs.
 
