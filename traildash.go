@@ -114,6 +114,7 @@ type cloudtrailRecord struct {
 	EventType          string
 	EventVersion       string
 	EventTime          string
+	ErrorMessage       string
 	AwsRegion          string
 	RequestID          string
 	RecipientAccountId string
