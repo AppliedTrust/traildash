@@ -8,14 +8,11 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/sqs"
-	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"net/url"
 	"os"
 	"os/signal"
-	"strings"
 	"syscall"
 	"time"
 )
@@ -40,7 +37,6 @@ AWS credentials are sourced by (in order): Environment Variables, ~/.aws/credent
 Optional Environment Variables:
 	AWS_REGION		AWS Region (SQS and S3 regions must match. default: us-east-1).
 	ES_URL			ElasticSearch URL (default: http://localhost:9200).
-	WEB_LISTEN		Listen IP and port for HTTP/HTTPS interface (default: 0.0.0.0:7000).
 	SSL_MODE		"off": disable HTTPS and use HTTP (default)
 				"custom": use custom key/cert stored stored in ".tdssl/key.pem" and ".tdssl/cert.pem"
 				"selfSigned": use key/cert in ".tdssl", generate an self-signed cert if empty
@@ -74,7 +70,6 @@ type config struct {
 	region     string
 	queueURL   string
 	esURL      string
-	listen     string
 	authUser   string
 	authPw     string
 	sslMode    sslModeOption
@@ -114,6 +109,7 @@ type cloudtrailRecord struct {
 	EventType          string
 	EventVersion       string
 	EventTime          string
+	ErrorMessage       string
 	AwsRegion          string
 	RequestID          string
 	RecipientAccountId string
@@ -131,7 +127,6 @@ func main() {
 	}
 
 	go c.workLogs()
-	go c.serveKibana()
 
 	log.Print("Started")
 	sig := make(chan os.Signal)
@@ -143,103 +138,6 @@ func main() {
 		}
 	}
 	log.Print("Exiting!")
-}
-
-// serveKibana runs a webserver for 1. kibana and 2. elasticsearch proxy
-func (c *config) serveKibana() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		webStaticHandler(w, r)
-	})
-	http.HandleFunc("/es/", c.proxyHandler)
-	if c.sslMode == SSLoff {
-		http.ListenAndServe(c.listen, nil)
-	} else {
-		http.ListenAndServeTLS(c.listen, SSLcertFile, SSLkeyFile, nil)
-	}
-	log.Print("Web server exit")
-}
-
-// webStaticHandler serves embedded static web files (js&css)
-func webStaticHandler(w http.ResponseWriter, r *http.Request) {
-	assetPath := "kibana/" + r.URL.Path[1:]
-	if assetPath == "kibana/" {
-		assetPath = "kibana/index.html"
-	}
-	staticAsset, err := Asset(assetPath)
-	if err != nil {
-		log.Printf("Kibana web error: %s", err.Error())
-		http.NotFound(w, r)
-		return
-	}
-	headers := w.Header()
-	if strings.HasSuffix(assetPath, ".js") {
-		headers["Content-Type"] = []string{"application/javascript"}
-	} else if strings.HasSuffix(assetPath, ".css") {
-		headers["Content-Type"] = []string{"text/css"}
-	} else if strings.HasSuffix(assetPath, ".html") {
-		headers["Content-Type"] = []string{"text/html"}
-	}
-	io.Copy(w, bytes.NewReader(staticAsset))
-}
-
-// proxyHandler securely proxies requests to the ElasticSearch instance
-func (c *config) proxyHandler(w http.ResponseWriter, r *http.Request) {
-	u, err := url.Parse(c.esURL)
-	if err != nil {
-		log.Printf("URL err: %s", err.Error())
-		http.Error(w, err.Error(), 500)
-		return
-	}
-
-	if firewallES(r) {
-		c.debug("Permitting ES %s request: %s", r.Method, r.RequestURI)
-	} else {
-		c.debug("Refusing ES %s request: %s", r.Method, r.RequestURI)
-		http.Error(w, "Permission denied", 403)
-		return
-	}
-
-	client := &http.Client{}
-	req := r
-	req.RequestURI = ""
-	req.Host = u.Host
-	req.URL.Host = req.Host
-	req.URL.Scheme = u.Scheme
-	req.URL.Path = strings.TrimPrefix(req.URL.Path, "/es")
-
-	resp, err := client.Do(req)
-	if err != nil {
-		c.debug("Proxy err: %s", err.Error())
-		http.Error(w, err.Error(), 500)
-		return
-	}
-	copyHeaders(w.Header(), resp.Header)
-	w.WriteHeader(resp.StatusCode)
-	_, err = io.Copy(w, resp.Body)
-	if err := resp.Body.Close(); err != nil {
-		c.debug("Can't close response body %v", err)
-	}
-	//c.debug("Copied %v bytes to client error=%v", nr, err)
-}
-
-// firewallES provides a basic "firewall" for ElasticSearch
-func firewallES(r *http.Request) bool {
-	switch r.Method {
-	case "GET":
-		return true
-	case "POST":
-		parts := strings.SplitN(r.RequestURI, "?", 2)
-		if strings.HasSuffix(parts[0], "_search") {
-			return true
-		}
-	case "PUT":
-		if strings.HasPrefix(r.RequestURI, "/es/kibana-int/dashboard/") {
-			return true
-		}
-	default:
-		return false
-	}
-	return false
 }
 
 // workLogs fetches and loads logs from SQS
@@ -433,13 +331,9 @@ func parseArgs() (*config, error) {
 	c.awsConfig = aws.Config{Region: aws.String(c.region)}
 	c.esURL = os.Getenv("ES_URL")
 	if len(c.esURL) < 1 {
-		c.esURL = "http://127.0.0.1:9200"
+		return nil, fmt.Errorf("Must specify ElasticSearch url with ES_URL env var.")
 	}
 
-	c.listen = os.Getenv("WEB_LISTEN")
-	if len(c.listen) < 1 {
-		c.listen = "0.0.0.0:7000"
-	}
 	if len(os.Getenv("DEBUG")) > 0 {
 		c.debugOn = true
 	}
@@ -489,16 +383,4 @@ func (c *config) debug(format string, m ...interface{}) {
 func kerblowie(format string, s ...interface{}) {
 	log.Printf(format, s...)
 	time.Sleep(5 * time.Second)
-}
-
-// copyHeaders copies HTTP headers to proxy responses
-func copyHeaders(dst, src http.Header) {
-	for k, _ := range dst {
-		dst.Del(k)
-	}
-	for k, vs := range src {
-		for _, v := range vs {
-			dst.Add(k, v)
-		}
-	}
 }
