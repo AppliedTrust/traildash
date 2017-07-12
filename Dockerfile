@@ -8,7 +8,7 @@ RUN     wget -q -O /usr/src/elasticsearch.deb https://download.elasticsearch.org
 
 #
 RUN     echo "# CORS settings:\nhttp.cors.enabled: true\nhttp.cors.allow-origin: true\n" >> /etc/elasticsearch/elasticsearch.yml
-ADD     traildash /usr/local/traildash/traildash
+ADD     dist/linux/amd64/traildash /usr/local/traildash/traildash
 
 # 
 ADD     backfill.py /usr/local/bin/
