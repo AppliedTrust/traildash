@@ -38,7 +38,9 @@ AWS credentials are sourced by (in order): Environment Variables, ~/.aws/credent
 	AWS_SECRET_ACCESS_KEY	AWS Secret Key.
 
 Optional Environment Variables:
-	AWS_REGION		AWS Region (SQS and S3 regions must match. default: us-east-1).
+	AWS_REGION		AWS Region (SQS and S3 region. default: us-east-1).
+	AWS_REGION_S3   AWS Region for S3 (overrides AWS_REGION for S3 if present. default: value of AWS_REGION)
+    AWS_REGION_SQS  AWS Region for SQS (overrides AWS_REGION for SQS if present. default: value of AWS_REGION)
 	ES_URL			ElasticSearch URL (default: http://localhost:9200).
 	WEB_LISTEN		Listen IP and port for HTTP/HTTPS interface (default: 0.0.0.0:7000).
 	SSL_MODE		"off": disable HTTPS and use HTTP (default)
@@ -379,8 +381,9 @@ func (c *config) download(m *cloudtrailNotification) (*[]cloudtrailRecord, error
 		return nil, fmt.Errorf("Expected one S3 key but got %d", len(m.S3ObjectKey[0]))
 	}
 	q := s3.GetObjectInput{
-		Bucket: aws.String(m.S3Bucket),
-		Key:    aws.String(m.S3ObjectKey[0]),
+		Bucket:                   aws.String(m.S3Bucket),
+		Key:                      aws.String(m.S3ObjectKey[0]),
+		ResponseContentEncoding:  aws.String("gzip"),
 	}
 	o, err := c.s.GetObject(&q)
 	if err != nil {
