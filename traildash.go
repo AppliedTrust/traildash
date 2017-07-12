@@ -38,7 +38,9 @@ AWS credentials are sourced by (in order): Environment Variables, ~/.aws/credent
 	AWS_SECRET_ACCESS_KEY	AWS Secret Key.
 
 Optional Environment Variables:
-	AWS_REGION		AWS Region (SQS and S3 regions must match. default: us-east-1).
+	AWS_REGION		AWS Region (SQS and S3 region. default: us-east-1).
+	AWS_REGION_S3   AWS Region for S3 (overrides AWS_REGION for S3 if present. default: value of AWS_REGION)
+    AWS_REGION_SQS  AWS Region for SQS (overrides AWS_REGION for SQS if present. default: value of AWS_REGION)
 	ES_URL			ElasticSearch URL (default: http://localhost:9200).
 	WEB_LISTEN		Listen IP and port for HTTP/HTTPS interface (default: 0.0.0.0:7000).
 	SSL_MODE		"off": disable HTTPS and use HTTP (default)
@@ -68,18 +70,23 @@ var sslModeOptionMap = map[string]sslModeOption{
 }
 
 type config struct {
-	awsKeyId   string
-	awsSecret  string
-	awsConfig  aws.Config
-	region     string
-	queueURL   string
-	esURL      string
-	listen     string
-	authUser   string
-	authPw     string
-	sslMode    sslModeOption
-	debugOn    bool
-	sqsPersist bool
+	awsKeyId     string
+	awsSecret    string
+	awsConfigS3  aws.Config
+    awsConfigSqs aws.Config
+	region       string
+    s3Region     string
+    sqsRegion    string
+	queueURL     string
+	esURL        string
+	listen       string
+	authUser     string
+	authPw       string
+	sslMode      sslModeOption
+	debugOn      bool
+	sqsPersist   bool
+	s            *s3.S3
+	q            *sqs.SQS
 }
 
 type sqsNotification struct {
@@ -99,6 +106,29 @@ type cloudtrailNotification struct {
 	S3ObjectKey   []string
 	MessageID     string
 	ReceiptHandle string
+}
+
+type s3BucketRef struct {
+    Name  string
+    Arn   string
+}
+
+type s3ObjectRef struct {
+    Key  string
+    Size int
+}
+
+type s3Ref struct {
+    Bucket s3BucketRef
+    Object s3ObjectRef
+}
+
+type s3Notification struct {
+    S3 s3Ref
+}
+
+type s3Notifications struct {
+	Records      []s3Notification
 }
 
 type cloudtrailLog struct {
@@ -291,14 +321,13 @@ func (c *config) workLogs() {
 // dequeue fetches an item from SQS
 func (c *config) dequeue() (*cloudtrailNotification, error) {
 	numRequested := 1
-	q := sqs.New(&c.awsConfig)
 
 	req := sqs.ReceiveMessageInput{
 		QueueURL:            aws.String(c.queueURL),
 		MaxNumberOfMessages: aws.Int64(int64(numRequested)),
 		WaitTimeSeconds:     aws.Int64(20), // max allowed
 	}
-	resp, err := q.ReceiveMessage(&req)
+	resp, err := c.q.ReceiveMessage(&req)
 	if err != nil {
 		return nil, fmt.Errorf("SQS ReceiveMessage error: %s", err.Error())
 	}
@@ -327,6 +356,22 @@ func (c *config) dequeue() (*cloudtrailNotification, error) {
 	} else if err := json.Unmarshal([]byte(not.Message), &n); err != nil {
 		return nil, fmt.Errorf("CloudTrail JSON error [id: %s]: %s", not.MessageID, err.Error())
 	}
+	
+	if len(n.S3ObjectKey) < 1 {
+	  s3n := s3Notifications{}
+	  if err := json.Unmarshal([]byte(not.Message), &s3n); err != nil {
+			return nil, fmt.Errorf("CloudTrail JSON error [id: %s]: %s", not.MessageID, err.Error())
+		}
+
+		if len(s3n.Records) > 0 {
+		  n.S3ObjectKey = make([]string, len(s3n.Records))
+			for i, r := range s3n.Records {
+			  n.S3ObjectKey[i] = r.S3.Object.Key
+			  n.S3Bucket = r.S3.Bucket.Name
+			}
+		}
+	}
+	
 	return &n, nil
 }
 
@@ -335,12 +380,12 @@ func (c *config) download(m *cloudtrailNotification) (*[]cloudtrailRecord, error
 	if len(m.S3ObjectKey) != 1 {
 		return nil, fmt.Errorf("Expected one S3 key but got %d", len(m.S3ObjectKey[0]))
 	}
-	s := s3.New(&c.awsConfig)
 	q := s3.GetObjectInput{
-		Bucket: aws.String(m.S3Bucket),
-		Key:    aws.String(m.S3ObjectKey[0]),
+		Bucket:                   aws.String(m.S3Bucket),
+		Key:                      aws.String(m.S3ObjectKey[0]),
+		ResponseContentEncoding:  aws.String("gzip"),
 	}
-	o, err := s.GetObject(&q)
+	o, err := c.s.GetObject(&q)
 	if err != nil {
 		return nil, err
 	}
@@ -388,12 +433,11 @@ func (c *config) load(records *[]cloudtrailRecord) error {
 
 // deleteSQS removes a completed notification from the queue
 func (c *config) deleteSQS(m *cloudtrailNotification) error {
-	q := sqs.New(&c.awsConfig)
 	req := sqs.DeleteMessageInput{
 		QueueURL:      aws.String(c.queueURL),
 		ReceiptHandle: aws.String(m.ReceiptHandle),
 	}
-	_, err := q.DeleteMessage(&req)
+	_, err := c.q.DeleteMessage(&req)
 	if err != nil {
 		return err
 	}
@@ -430,7 +474,23 @@ func parseArgs() (*config, error) {
 	if len(c.region) < 1 {
 		c.region = "us-east-1"
 	}
-	c.awsConfig = aws.Config{Region: aws.String(c.region)}
+
+	c.s3Region = c.region
+	if len(os.Getenv("AWS_REGION_S3")) > 0 {
+        c.s3Region = os.Getenv("AWS_REGION_S3")
+    }
+    
+    c.sqsRegion = c.region
+    if len(os.Getenv("AWS_REGION_SQS")) > 0 {
+        c.sqsRegion = os.Getenv("AWS_REGION_SQS")
+    }
+	
+	c.awsConfigS3 = aws.Config{Region: aws.String(c.s3Region)}
+    c.awsConfigSqs = aws.Config{Region: aws.String(c.sqsRegion)}
+    
+    c.s = s3.New(&c.awsConfigS3)
+    c.q = sqs.New(&c.awsConfigSqs)
+
 	c.esURL = os.Getenv("ES_URL")
 	if len(c.esURL) < 1 {
 		c.esURL = "http://127.0.0.1:9200"
